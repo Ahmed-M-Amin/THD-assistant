@@ -4,7 +4,11 @@
 
 [Home](https://mygit.th-deg.de/<aa18330>/application-admission-assistant-thd)
 
-[Wiki Page](https://mygit.th-deg.de/<aa18330>/application-admission-assistant-thd/-/wikis/home)
+## Wiki links
+- Home: https://mygit.th-deg.de/aa18330/application-admission-assistant-thd/-/wikis/home
+- Personae: https://mygit.th-deg.de/aa18330/application-admission-assistant-thd/-/wikis/Personae
+- Use cases: https://mygit.th-deg.de/aa18330/application-admission-assistant-thd/-/wikis/Use-cases
+
 
 # Project description
 This project develops a simple speech assistant that helps students and applicants with the admission and application process at THD.
@@ -21,5 +25,9 @@ Used versions:
 
 # Basic Usage
 streamlit run app/app.py
+
+
+## .gitignore
+Using Python template; models/large binaries are not committed.
 
 
