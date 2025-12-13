@@ -1,0 +1,281 @@
+programs:
+- code: beng_applied_computer_science
+  title: B.Eng. Applied Computer Science
+  path: data/programs/beng_applied_computer_science.yaml
+- code: bsc_applied_sports_science
+  title: B.Sc. Applied Sports Science
+  path: data/programs/bsc_applied_sports_science.yaml
+- code: bsc_economics
+  title: B.Sc. Economics
+  path: data/programs/bsc_economics.yaml
+- code: bsc_ai
+  title: B.Sc. Artificial Intelligence
+  path: data/programs/bsc_ai.yaml
+- code: bsc_organisational_and_economic_psychology
+  title: B.Sc. Organisational and Economic Psychology
+  path: data/programs/bsc_organisational_and_economic_psychology.yaml
+- code: beng_civil_and_construction_engineering
+  title: B.Eng. Civil and Construction Engineering
+  path: data/programs/beng_civil_and_construction_engineering.yaml
+- code: beng_project_management_in_civil_and_construction_engineering
+  title: B.Eng. Project Management in Civil and Construction Engineering
+  path: data/programs/beng_project_management_in_civil_and_construction_engineering.yaml
+- code: ba_business_administration
+  title: B.A. Business Administration
+  path: data/programs/ba_business_administration.yaml
+- code: bsc_bioinformatics
+  title: B.Sc. Bioinformatics
+  path: data/programs/bsc_bioinformatics.yaml
+- code: beng_building_products_and_processes
+  title: B.Eng. Building Products and Processes
+  path: data/programs/beng_building_products_and_processes.yaml
+- code: ba_business_administration_and_service_management
+  title: B.A. Business Administration and Service Management
+  path: data/programs/ba_business_administration_and_service_management.yaml
+- code: beng_circular_engineering
+  title: B.Eng. Circular Engineering
+  path: data/programs/beng_circular_engineering.yaml
+- code: bsc_cyber_security
+  title: B.Sc. Cyber Security
+  path: data/programs/bsc_cyber_security.yaml
+- code: beng_electrical_engineering_and_information_technology
+  title: B.Eng. Electrical Engineering and Information Technology
+  path: data/programs/beng_electrical_engineering_and_information_technology.yaml
+- code: beng_electrical_engineering_and_information_technology_international
+  title: B.Eng. Electrical Engineering and Information Technology - INTERNATIONAL
+  path: data/programs/beng_electrical_engineering_and_information_technology_international.yaml
+- code: beng_electronics_for_artificial_intelligence
+  title: B.Eng. Electronics for Artificial Intelligence
+  path: data/programs/beng_electronics_for_artificial_intelligence.yaml
+- code: beng_electronics_engineering_for_artificial_intelligence_international
+  title: B.Eng. Electronics Engineering for Artificial Intelligence - INTERNATIONAL
+  path: data/programs/beng_electronics_engineering_for_artificial_intelligence_international.yaml
+- code: beng_electromobility_autonomous_driving_and_mobile_robotics
+  title: B.Eng. Electromobility, Autonomous Driving and Mobile Robotics
+  path: data/programs/beng_electromobility_autonomous_driving_and_mobile_robotics.yaml
+- code: beng_electromobility_autonomous_driving_and_mobile_robotics_international
+  title: B.Eng. Electromobility, Autonomous Driving and Mobile Robotics - INTERNATIONAL
+  path: data/programs/beng_electromobility_autonomous_driving_and_mobile_robotics_international.yaml
+- code: beng_energy_systems_engineering
+  title: B.Eng. Energy Systems Engineering
+  path: data/programs/beng_energy_systems_engineering.yaml
+- code: bsc_ergotherapy
+  title: B.Sc. Ergotherapy
+  path: data/programs/bsc_ergotherapy.yaml
+- code: beng_sustainable_systems_engineering
+  title: B.Eng. Sustainable Systems Engineering
+  path: data/programs/beng_sustainable_systems_engineering.yaml
+- code: bsc_health_informatics
+  title: B.Sc. Health Informatics
+  path: data/programs/bsc_health_informatics.yaml
+- code: beng_industrial_engineering
+  title: B.Eng. Industrial Engineering
+  path: data/programs/beng_industrial_engineering.yaml
+- code: ba_international_management
+  title: B.A. International Management
+  path: data/programs/ba_international_management.yaml
+- code: ba_international_tourism_management_health_and_medical_tourism
+  title: B.A. International Tourism Management / Health and Medical Tourism
+  path: data/programs/ba_international_tourism_management_health_and_medical_tourism.yaml
+- code: bsc_management_in_health_social_and_rescue_services
+  title: B.Sc. Management in Health, Social and Rescue Services
+  path: data/programs/bsc_management_in_health_social_and_rescue_services.yaml
+- code: bsc_management_in_rescue_services
+  title: B.Sc. Management in Rescue Services
+  path: data/programs/bsc_management_in_rescue_services.yaml
+- code: ba_management_of_inclusion_and_participation
+  title: B.A. Management of Inclusion and Participation
+  path: data/programs/ba_management_of_inclusion_and_participation.yaml
+- code: beng_mechanical_engineering
+  title: B.Eng. Mechanical Engineering
+  path: data/programs/beng_mechanical_engineering.yaml
+- code: beng_mechatronics
+  title: B.Eng. Mechatronics
+  path: data/programs/beng_mechatronics.yaml
+- code: beng_mechatronics_and_project_management_for_digital_production
+  title: B.Eng. Mechatronics and Project Management for Digital Production (in Cham)
+  path: data/programs/beng_mechatronics_and_project_management_for_digital_production.yaml
+- code: beng_media_technology
+  title: B.Eng. Media Technology
+  path: data/programs/beng_media_technology.yaml
+- code: bsc_emergency_paramedic
+  title: B.Sc. Emergency Paramedic
+  path: data/programs/bsc_emergency_paramedic.yaml
+- code: bsc_nursing
+  title: B.Sc. Nursing
+  path: data/programs/bsc_nursing.yaml
+- code: bsc_physician_assistant
+  title: B.Sc. Physician Assistant
+  path: data/programs/bsc_physician_assistant.yaml
+- code: bsc_physiotherapy_majoring_in_kinesiology_cooperative_studies
+  title: B.Sc. Physiotherapy Majoring in Kinesiology (cooperative studies)
+  path: data/programs/bsc_physiotherapy_majoring_in_kinesiology_cooperative_studies.yaml
+- code: bsc_software_design
+  title: B.Sc. Software-Design
+  path: data/programs/bsc_software_design.yaml
+- code: ba_social_work
+  title: B.A. Social Work
+  path: data/programs/ba_social_work.yaml
+- code: beng_technical_design
+  title: B.Eng. Technical Design
+  path: data/programs/beng_technical_design.yaml
+- code: beng_engineering_physics
+  title: B.Eng. Engineering Physics
+  path: data/programs/beng_engineering_physics.yaml
+- code: ba_tourism_management
+  title: B.A. Tourism Management
+  path: data/programs/ba_tourism_management.yaml
+- code: beng_environmental_engineering
+  title: B.Eng. Environmental Engineering
+  path: data/programs/beng_environmental_engineering.yaml
+- code: bsc_traffic_sciences
+  title: B.Sc. Traffic Sciences
+  path: data/programs/bsc_traffic_sciences.yaml
+- code: bsc_business_informatics
+  title: B.Sc. Business Informatics
+  path: data/programs/bsc_business_informatics.yaml
+- code: bsc_business_information_systems
+  title: B.Sc. Business Information Systems
+  path: data/programs/bsc_business_information_systems.yaml
+- code: ba_cosmetic_science_and_management
+  title: B.A. Cosmetic Science & Management
+  path: data/programs/ba_cosmetic_science_and_management.yaml
+- code: ba_nursing_pedagogy
+  title: B.A. Nursing Pedagogy
+  path: data/programs/ba_nursing_pedagogy.yaml
+- code: ba_business_administration_and_management
+  title: B.A. Business Administration and Management
+  path: data/programs/ba_business_administration_and_management.yaml
+- code: ba_pedagogy_in_rescue_services
+  title: B.A. Pedagogy in Rescue Services
+  path: data/programs/ba_pedagogy_in_rescue_services.yaml
+- code: ba_security_management
+  title: B.A. Security Management
+  path: data/programs/ba_security_management.yaml
+- code: bsc_sustainability_governance_and_digitalisation
+  title: B.Sc. Sustainability, Governance & Digitalisation
+  path: data/programs/bsc_sustainability_governance_and_digitalisation.yaml
+- code: beng_industrial_engineering_mechatronic_systems
+  title: B.Eng. Industrial Engineering - Mechatronic Systems
+  path: data/programs/beng_industrial_engineering_mechatronic_systems.yaml
+- code: msc_applied_computer_science
+  title: M.Sc. Applied Computer Science
+  path: data/programs/msc_applied_computer_science.yaml
+- code: msc_applied_research_in_engineering_sciences
+  title: M.Sc. Applied Research in Engineering Sciences
+  path: data/programs/msc_applied_research_in_engineering_sciences.yaml
+- code: msc_applied_sports_science_with_focus_on_interprofessional_care_in_sports
+  title: M.Sc. Applied Sports Science with Focus on Interprofessional Care in Sports
+  path: data/programs/msc_applied_sports_science_with_focus_on_interprofessional_care_in_sports.yaml
+- code: msc_artificial_intelligence_and_data_science
+  title: M.Sc. Artificial Intelligence and Data Science
+  path: data/programs/msc_artificial_intelligence_and_data_science.yaml
+- code: meng_applied_ai_for_digital_production_management
+  title: M.Eng. Applied AI for Digital Production Management (in Cham)
+  path: data/programs/meng_applied_ai_for_digital_production_management.yaml
+- code: meng_artificial_intelligence_for_smart_sensors_and_actuators
+  title: M.Eng. Artificial Intelligence for Smart Sensors and Actuators (in Cham)
+  path: data/programs/meng_artificial_intelligence_for_smart_sensors_and_actuators.yaml
+- code: meng_automotive_software_engineering
+  title: M.Eng. Automotive Software Engineering
+  path: data/programs/meng_automotive_software_engineering.yaml
+- code: msc_business_informatics
+  title: M.Sc. Business Informatics
+  path: data/programs/msc_business_informatics.yaml
+- code: meng_civil_and_environmental_engineering
+  title: M.Eng. Civil and Environmental Engineering
+  path: data/programs/meng_civil_and_environmental_engineering.yaml
+- code: msc_digital_business
+  title: M.Sc. Digital Business
+  path: data/programs/msc_digital_business.yaml
+- code: msc_digital_business_psychology
+  title: M.Sc. Digital Business Psychology
+  path: data/programs/msc_digital_business_psychology.yaml
+- code: msc_digital_health
+  title: M.Sc. Digital Health
+  path: data/programs/msc_digital_health.yaml
+- code: msc_electrical_engineering_and_information_technology
+  title: M.Sc. Electrical Engineering and Information Technology
+  path: data/programs/msc_electrical_engineering_and_information_technology.yaml
+- code: msc_entrepreneurial_game_development
+  title: M.Sc. Entrepreneurial Game Development
+  path: data/programs/msc_entrepreneurial_game_development.yaml
+- code: msc_global_public_health
+  title: M.Sc. Global Public Health
+  path: data/programs/msc_global_public_health.yaml
+- code: meng_healthy_and_sustainable_buildings
+  title: M.Eng. Healthy and Sustainable Buildings
+  path: data/programs/meng_healthy_and_sustainable_buildings.yaml
+- code: msc_high_performance_computing_quantum_computing
+  title: M.Sc. High Performance Computing / Quantum Computing
+  path: data/programs/msc_high_performance_computing_quantum_computing.yaml
+- code: ma_human_resource_management
+  title: M.A. Human Resource Management
+  path: data/programs/ma_human_resource_management.yaml
+- code: meng_robotics
+  title: M.Eng. Robotics (in Cham)
+  path: data/programs/meng_robotics.yaml
+- code: ma_international_tourism_development
+  title: M.A. International Tourism Development
+  path: data/programs/ma_international_tourism_development.yaml
+- code: msc_life_science_informatics
+  title: M.Sc. Life Science Informatics
+  path: data/programs/msc_life_science_informatics.yaml
+- code: meng_mechanical_engineering
+  title: M.Eng. Mechanical Engineering
+  path: data/programs/meng_mechanical_engineering.yaml
+- code: meng_mechatronic_and_cyber_physical_systems
+  title: M.Eng. Mechatronic and Cyber-Physical Systems (in Deggendorf)
+  path: data/programs/meng_mechatronic_and_cyber_physical_systems.yaml
+- code: meng_mechatronic_and_cyber_physical_systems_2
+  title: M.Eng. Mechatronic and Cyber-Physical Systems (in Cham)
+  path: data/programs/meng_mechatronic_and_cyber_physical_systems_2.yaml
+- code: meng_media_technology
+  title: M.Eng. Media Technology
+  path: data/programs/meng_media_technology.yaml
+- code: msc_mental_health
+  title: M.Sc. Mental Health
+  path: data/programs/msc_mental_health.yaml
+- code: ma_strategic_and_international_management
+  title: M.A. Strategic and International Management
+  path: data/programs/ma_strategic_and_international_management.yaml
+- code: meng_technology_management
+  title: M.Eng. Technology Management
+  path: data/programs/meng_technology_management.yaml
+- code: msc_transformation_and_sustainable_living_space_development_redesigning_tourism
+  title: M.Sc. Transformation and sustainable living space development - redesigning
+    tourism
+  path: data/programs/msc_transformation_and_sustainable_living_space_development_redesigning_tourism.yaml
+- code: meng_automotive_electronics
+  title: M.Eng. Automotive Electronics
+  path: data/programs/meng_automotive_electronics.yaml
+- code: meng_cyber_security
+  title: M.Eng. Cyber Security
+  path: data/programs/meng_cyber_security.yaml
+- code: meng_digital_business_engineering
+  title: M.Eng. Digital Business Engineering
+  path: data/programs/meng_digital_business_engineering.yaml
+- code: mba_mba_business_development_and_entrepreneurship
+  title: MBA MBA Business Development & Entrepreneurship
+  path: data/programs/mba_mba_business_development_and_entrepreneurship.yaml
+- code: mba_mba_company_succession
+  title: MBA MBA Company Succession
+  path: data/programs/mba_mba_company_succession.yaml
+- code: mba_mba_general_management
+  title: MBA MBA General Management
+  path: data/programs/mba_mba_general_management.yaml
+- code: ma_new_management
+  title: M.A. New Management
+  path: data/programs/ma_new_management.yaml
+- code: msc_organisational_and_economic_psychology
+  title: M.Sc. Organisational and Economic Psychology
+  path: data/programs/msc_organisational_and_economic_psychology.yaml
+- code: ma_public_management
+  title: M.A. Public Management
+  path: data/programs/ma_public_management.yaml
+- code: ma_risk_and_compliancemanagement
+  title: M.A. Risk and Compliancemanagement
+  path: data/programs/ma_risk_and_compliancemanagement.yaml
+- code: msc_vocational_pedagogy_health_and_care
+  title: M.Sc. Vocational Pedagogy - Health & Care
+  path: data/programs/msc_vocational_pedagogy_health_and_care.yaml

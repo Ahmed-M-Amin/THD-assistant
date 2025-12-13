@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "thd-assistant"
+version = "1.0.0"
+description = "THD University Multilingual Assistant Chatbot"
+requires-python = ">=3.9"
+dependencies = [
+    "streamlit",
+    "google-genai",
+    "pyyaml",
+    "pydantic",
+    "pydantic-settings",
+    "sentence-transformers",
+    "scikit-learn",
+    "SpeechRecognition",
+    "edge-tts",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-mock",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
