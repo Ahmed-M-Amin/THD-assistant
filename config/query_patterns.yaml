@@ -1,0 +1,106 @@
+query_types:
+  - type: "fees_query"
+    description: "Questions about tuition, costs, and financial information"
+    keywords:
+      - fees
+      - cost
+      - tuition
+      - price
+      - "how much"
+      - expensive
+      - payment
+      - "semester contribution"
+      - "student union fee"
+    example_questions:
+      - "What are the fees for cyber security?"
+      - "How much does it cost to study at THD?"
+      - "Tuition fees for international students"
+      - "Are there any fees for EU students?"
+  - type: "deadline_query"
+    description: "Questions about application deadlines and timelines"
+    keywords:
+      - deadline
+      - when
+      - "apply by"
+      - "application date"
+      - "last date"
+      - "start date"
+      - intake
+      - semester
+    example_questions:
+      - "When is the application deadline?"
+      - "When can I apply for winter semester?"
+      - "What is the last date to submit?"
+  - type: "requirements_query"
+    description: "Questions about admission requirements and qualifications"
+    keywords:
+      - requirements
+      - need
+      - prerequisites
+      - qualifications
+      - documents
+      - IELTS
+      - TOEFL
+      - TestDaF
+      - GPA
+      - "language certificate"
+    example_questions:
+      - "What are the requirements for cyber security?"
+      - "Do I need IELTS?"
+      - "What documents do I need to apply?"
+  - type: "program_search"
+    description: "Questions about finding or listing programs"
+    keywords:
+      - programs
+      - "available in"
+      - courses
+      - masters
+      - bachelors
+      - study
+      - offered
+      - "which programs"
+    example_questions:
+      - "What programs are available in English?"
+      - "Show me all master programs"
+      - "Which courses can I study at THD?"
+  - type: "program_details"
+    description: "Questions about specific program information"
+    keywords:
+      - duration
+      - ECTS
+      - curriculum
+      - "how long"
+      - semesters
+      - years
+      - faculty
+    example_questions:
+      - "How long is the cyber security program?"
+      - "What topics are covered?"
+      - "Program duration"
+  - type: "comparison_query"
+    description: "Questions comparing multiple programs or options"
+    keywords:
+      - difference
+      - compare
+      - versus
+      - vs
+      - better
+      - "which one"
+      - between
+    example_questions:
+      - "Difference between B.Sc. AI and M.Sc. AI?"
+      - "Compare MBA programs at THD"
+  - type: "application_process"
+    description: "Questions about how to apply"
+    keywords:
+      - "how to apply"
+      - "application process"
+      - portal
+      - Primuss
+      - submit
+      - upload
+      - steps
+    example_questions:
+      - "How do I apply?"
+      - "What is the application process?"
+      - "Where do I submit my documents?"

@@ -1,0 +1,88 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Models (large files)
+models/
+*.gguf
+*.onnx
+*.bin
+
+# Environment
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Audio files
+*.wav
+*.mp3
+*.flac
+!tests/audio_samples/*.wav
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Project-specific exclusions
+backups/
+data/cache/
+data/sessions/
+
+# Secret files (NEVER COMMIT THESE)
+secrets.toml
+.streamlit/secrets.toml
+config/secrets.yaml
+keys/
+*.key
+*.pem
+*.p12
+google-credentials.json
+service-account.json
+
+# Private files
+main.py

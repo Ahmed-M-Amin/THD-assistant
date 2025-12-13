@@ -1,0 +1,137 @@
+version: '1.0'
+updated_at: '2025-11-01'
+program:
+  code: msc_life_science_informatics
+  title: M.Sc. Life Science Informatics
+  degree_level: master
+  faculty: THD
+  language_of_instruction: en
+  duration_semesters: 3
+  ects_total: 90
+  intakes:
+  - term: winter
+    application_window:
+      start: '2025-04-15'
+      end: '2025-07-15'
+  application_portal:
+    label: Primuss
+    url: https://primuss.example
+  field_of_study: computer_science
+  tags:
+  - ai
+  - computer_science
+  - cyber
+  - data
+  - informatics
+  - it
+  - life
+  - life_science_informatics
+  - network
+  - programming
+  common_queries:
+  - What are the fees for M.Sc. Life Science Informatics?
+  - What are the requirements for M.Sc. Life Science Informatics?
+  - Application deadline for M.Sc. Life Science Informatics
+  - How long is the M.Sc. Life Science Informatics program?
+  - Is M.Sc. Life Science Informatics fully taught in English?
+  quick_facts:
+  - Master of Science (M.Sc.)
+  - 3 semesters (1.5 years)
+  - Taught in English
+  - 90 ECTS total
+  - €82 semester contribution for EU students
+  - No tuition fees for non-EU students (only €82 semester contribution)
+contacts:
+  programme_page: https://program.example/msc_life_science_informatics
+  admissions_email: bewerbung@th-deg.de
+  international_office_email: welcome@th-deg.de
+  office_hours_url: https://intl-office.example/hours
+eligibility:
+  academic_background:
+    bachelor:
+      required:
+      - University entrance qualification (e.g., Abitur or equivalent)
+      preferred:
+      - Maths and CS basics
+    master:
+      required:
+      - Relevant Bachelor's degree
+      - Transcript with GPA
+      preferred:
+      - Work/Research experience
+  language_requirements:
+    notes: Certificates must be < 2 years old.
+    german:
+      minimum_level: A1
+      accepted_proofs:
+      - Goethe A1
+      - telc A1
+    english:
+      minimum_level: B2
+      accepted_proofs:
+      - IELTS 6.0
+      - TOEFL iBT ≥ 72
+      - PTE Academic ≥ 59
+      - telc B2
+  programme_specific_requirements:
+    description: None
+fees:
+  domestic_german:
+    student_union_per_semester: €82
+    tuition_per_semester: €0
+    other_fees: []
+  eu_eea:
+    student_union_per_semester: €82
+    tuition_per_semester: €0
+    other_fees: []
+  international_non_eu:
+    application_fee_one_time: €60
+    service_fee_per_semester: €500
+    student_union_per_semester: €82
+    tuition_per_semester: €0
+required_documents:
+  bachelor:
+    domestic_german:
+    - Entrance qualification (certified copy if required)
+    - ID / Passport copy
+    - Language certificate
+    - CV
+    eu_eea:
+    - Entrance qualification (certified copy or recognized equivalent)
+    - ID / Passport copy
+    - Language certificate
+    - CV
+    international_non_eu:
+    - School leaving certificate + official translation
+    - Passport copy
+    - Language certificate
+    - CV
+  master:
+    domestic_german:
+    - Relevant Bachelor's degree certificate + transcript
+    - ID / Passport copy
+    - Language certificate
+    - CV
+    eu_eea:
+    - Bachelor degree + transcript (recognized)
+    - ID / Passport copy
+    - Language certificate
+    - CV
+    international_non_eu:
+    - Bachelor degree + transcript + official translation
+    - Passport copy
+    - Language certificate
+    - CV
+policies:
+  late_documents: If permitted, provisional uploads allowed; final docs due before
+    enrolment.
+  recognition_of_priors: External credits may be recognized; see recognition form.
+  visa_requirement: International non‑EU generally requires student visa.
+faqs:
+- q: Can I apply without the final certificate?
+  a: You may upload provisional results if permitted; final certificate must be submitted
+    later.
+- q: Do I need certified translations?
+  a: Yes, for documents not in German or English.
+notes:
+- Always check official programme page for changes.

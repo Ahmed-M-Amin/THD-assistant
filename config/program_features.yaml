@@ -1,0 +1,542 @@
+by_language:
+  english:
+  - ba_business_administration_and_service_management
+  - ba_international_management
+  - ba_international_tourism_management_health_and_medical_tourism
+  - beng_building_products_and_processes
+  - beng_electrical_engineering_and_information_technology_international
+  - beng_electromobility_autonomous_driving_and_mobile_robotics_international
+  - beng_electronics_engineering_for_artificial_intelligence_international
+  - beng_energy_systems_engineering
+  - beng_industrial_engineering
+  - bsc_ai
+  - bsc_health_informatics
+  - bsc_nursing
+  - ma_international_tourism_development
+  - meng_applied_ai_for_digital_production_management
+  - meng_artificial_intelligence_for_smart_sensors_and_actuators
+  - meng_automotive_software_engineering
+  - meng_healthy_and_sustainable_buildings
+  - meng_mechatronic_and_cyber_physical_systems
+  - meng_mechatronic_and_cyber_physical_systems_2
+  - meng_robotics
+  - msc_applied_computer_science
+  - msc_artificial_intelligence_and_data_science
+  - msc_digital_health
+  - msc_electrical_engineering_and_information_technology
+  - msc_global_public_health
+  - msc_high_performance_computing_quantum_computing
+  - msc_life_science_informatics
+  german:
+  - ba_business_administration
+  - ba_business_administration_and_management
+  - ba_cosmetic_science_and_management
+  - ba_management_of_inclusion_and_participation
+  - ba_nursing_pedagogy
+  - ba_pedagogy_in_rescue_services
+  - ba_security_management
+  - ba_social_work
+  - ba_tourism_management
+  - beng_applied_computer_science
+  - beng_circular_engineering
+  - beng_civil_and_construction_engineering
+  - beng_electrical_engineering_and_information_technology
+  - beng_electromobility_autonomous_driving_and_mobile_robotics
+  - beng_electronics_for_artificial_intelligence
+  - beng_engineering_physics
+  - beng_environmental_engineering
+  - beng_industrial_engineering_mechatronic_systems
+  - beng_mechanical_engineering
+  - beng_mechatronics
+  - beng_mechatronics_and_project_management_for_digital_production
+  - beng_media_technology
+  - beng_project_management_in_civil_and_construction_engineering
+  - beng_sustainable_systems_engineering
+  - beng_technical_design
+  - bsc_applied_sports_science
+  - bsc_bioinformatics
+  - bsc_business_informatics
+  - bsc_business_information_systems
+  - bsc_cyber_security
+  - bsc_economics
+  - bsc_emergency_paramedic
+  - bsc_ergotherapy
+  - bsc_management_in_health_social_and_rescue_services
+  - bsc_management_in_rescue_services
+  - bsc_organisational_and_economic_psychology
+  - bsc_physician_assistant
+  - bsc_physiotherapy_majoring_in_kinesiology_cooperative_studies
+  - bsc_software_design
+  - bsc_sustainability_governance_and_digitalisation
+  - bsc_traffic_sciences
+  - ma_human_resource_management
+  - ma_new_management
+  - ma_public_management
+  - ma_risk_and_compliancemanagement
+  - ma_strategic_and_international_management
+  - mba_mba_business_development_and_entrepreneurship
+  - mba_mba_company_succession
+  - mba_mba_general_management
+  - meng_automotive_electronics
+  - meng_civil_and_environmental_engineering
+  - meng_cyber_security
+  - meng_digital_business_engineering
+  - meng_mechanical_engineering
+  - meng_media_technology
+  - meng_technology_management
+  - msc_applied_research_in_engineering_sciences
+  - msc_applied_sports_science_with_focus_on_interprofessional_care_in_sports
+  - msc_business_informatics
+  - msc_digital_business
+  - msc_digital_business_psychology
+  - msc_entrepreneurial_game_development
+  - msc_mental_health
+  - msc_organisational_and_economic_psychology
+  - msc_transformation_and_sustainable_living_space_development_redesigning_tourism
+  - msc_vocational_pedagogy_health_and_care
+  other: []
+by_degree_level:
+  bachelor:
+  - ba_business_administration
+  - ba_business_administration_and_management
+  - ba_business_administration_and_service_management
+  - ba_cosmetic_science_and_management
+  - ba_international_management
+  - ba_international_tourism_management_health_and_medical_tourism
+  - ba_management_of_inclusion_and_participation
+  - ba_nursing_pedagogy
+  - ba_pedagogy_in_rescue_services
+  - ba_security_management
+  - ba_social_work
+  - ba_tourism_management
+  - beng_applied_computer_science
+  - beng_building_products_and_processes
+  - beng_circular_engineering
+  - beng_civil_and_construction_engineering
+  - beng_electrical_engineering_and_information_technology
+  - beng_electrical_engineering_and_information_technology_international
+  - beng_electromobility_autonomous_driving_and_mobile_robotics
+  - beng_electromobility_autonomous_driving_and_mobile_robotics_international
+  - beng_electronics_engineering_for_artificial_intelligence_international
+  - beng_electronics_for_artificial_intelligence
+  - beng_energy_systems_engineering
+  - beng_engineering_physics
+  - beng_environmental_engineering
+  - beng_industrial_engineering
+  - beng_industrial_engineering_mechatronic_systems
+  - beng_mechanical_engineering
+  - beng_mechatronics
+  - beng_mechatronics_and_project_management_for_digital_production
+  - beng_media_technology
+  - beng_project_management_in_civil_and_construction_engineering
+  - beng_sustainable_systems_engineering
+  - beng_technical_design
+  - bsc_ai
+  - bsc_applied_sports_science
+  - bsc_bioinformatics
+  - bsc_business_informatics
+  - bsc_business_information_systems
+  - bsc_cyber_security
+  - bsc_economics
+  - bsc_emergency_paramedic
+  - bsc_ergotherapy
+  - bsc_health_informatics
+  - bsc_management_in_health_social_and_rescue_services
+  - bsc_management_in_rescue_services
+  - bsc_nursing
+  - bsc_organisational_and_economic_psychology
+  - bsc_physician_assistant
+  - bsc_physiotherapy_majoring_in_kinesiology_cooperative_studies
+  - bsc_software_design
+  - bsc_sustainability_governance_and_digitalisation
+  - bsc_traffic_sciences
+  master:
+  - ma_human_resource_management
+  - ma_international_tourism_development
+  - ma_new_management
+  - ma_public_management
+  - ma_risk_and_compliancemanagement
+  - ma_strategic_and_international_management
+  - mba_mba_business_development_and_entrepreneurship
+  - mba_mba_company_succession
+  - mba_mba_general_management
+  - meng_applied_ai_for_digital_production_management
+  - meng_artificial_intelligence_for_smart_sensors_and_actuators
+  - meng_automotive_electronics
+  - meng_automotive_software_engineering
+  - meng_civil_and_environmental_engineering
+  - meng_cyber_security
+  - meng_digital_business_engineering
+  - meng_healthy_and_sustainable_buildings
+  - meng_mechanical_engineering
+  - meng_mechatronic_and_cyber_physical_systems
+  - meng_mechatronic_and_cyber_physical_systems_2
+  - meng_media_technology
+  - meng_robotics
+  - meng_technology_management
+  - msc_applied_computer_science
+  - msc_applied_research_in_engineering_sciences
+  - msc_applied_sports_science_with_focus_on_interprofessional_care_in_sports
+  - msc_artificial_intelligence_and_data_science
+  - msc_business_informatics
+  - msc_digital_business
+  - msc_digital_business_psychology
+  - msc_digital_health
+  - msc_electrical_engineering_and_information_technology
+  - msc_entrepreneurial_game_development
+  - msc_global_public_health
+  - msc_high_performance_computing_quantum_computing
+  - msc_life_science_informatics
+  - msc_mental_health
+  - msc_organisational_and_economic_psychology
+  - msc_transformation_and_sustainable_living_space_development_redesigning_tourism
+  - msc_vocational_pedagogy_health_and_care
+  doctoral: []
+  mba: []
+  other: []
+with_tuition_fees: []
+no_tuition_for_eu:
+- ba_business_administration
+- ba_business_administration_and_management
+- ba_business_administration_and_service_management
+- ba_cosmetic_science_and_management
+- ba_international_management
+- ba_international_tourism_management_health_and_medical_tourism
+- ba_management_of_inclusion_and_participation
+- ba_nursing_pedagogy
+- ba_pedagogy_in_rescue_services
+- ba_security_management
+- ba_social_work
+- ba_tourism_management
+- beng_applied_computer_science
+- beng_building_products_and_processes
+- beng_circular_engineering
+- beng_civil_and_construction_engineering
+- beng_electrical_engineering_and_information_technology
+- beng_electrical_engineering_and_information_technology_international
+- beng_electromobility_autonomous_driving_and_mobile_robotics
+- beng_electromobility_autonomous_driving_and_mobile_robotics_international
+- beng_electronics_engineering_for_artificial_intelligence_international
+- beng_electronics_for_artificial_intelligence
+- beng_energy_systems_engineering
+- beng_engineering_physics
+- beng_environmental_engineering
+- beng_industrial_engineering
+- beng_industrial_engineering_mechatronic_systems
+- beng_mechanical_engineering
+- beng_mechatronics
+- beng_mechatronics_and_project_management_for_digital_production
+- beng_media_technology
+- beng_project_management_in_civil_and_construction_engineering
+- beng_sustainable_systems_engineering
+- beng_technical_design
+- bsc_ai
+- bsc_applied_sports_science
+- bsc_bioinformatics
+- bsc_business_informatics
+- bsc_business_information_systems
+- bsc_cyber_security
+- bsc_economics
+- bsc_emergency_paramedic
+- bsc_ergotherapy
+- bsc_health_informatics
+- bsc_management_in_health_social_and_rescue_services
+- bsc_management_in_rescue_services
+- bsc_nursing
+- bsc_organisational_and_economic_psychology
+- bsc_physician_assistant
+- bsc_physiotherapy_majoring_in_kinesiology_cooperative_studies
+- bsc_software_design
+- bsc_sustainability_governance_and_digitalisation
+- bsc_traffic_sciences
+- ma_human_resource_management
+- ma_international_tourism_development
+- ma_new_management
+- ma_public_management
+- ma_risk_and_compliancemanagement
+- ma_strategic_and_international_management
+- mba_mba_business_development_and_entrepreneurship
+- mba_mba_company_succession
+- mba_mba_general_management
+- meng_applied_ai_for_digital_production_management
+- meng_artificial_intelligence_for_smart_sensors_and_actuators
+- meng_automotive_electronics
+- meng_automotive_software_engineering
+- meng_civil_and_environmental_engineering
+- meng_cyber_security
+- meng_digital_business_engineering
+- meng_healthy_and_sustainable_buildings
+- meng_mechanical_engineering
+- meng_mechatronic_and_cyber_physical_systems
+- meng_mechatronic_and_cyber_physical_systems_2
+- meng_media_technology
+- meng_robotics
+- meng_technology_management
+- msc_applied_computer_science
+- msc_applied_research_in_engineering_sciences
+- msc_applied_sports_science_with_focus_on_interprofessional_care_in_sports
+- msc_artificial_intelligence_and_data_science
+- msc_business_informatics
+- msc_digital_business
+- msc_digital_business_psychology
+- msc_digital_health
+- msc_electrical_engineering_and_information_technology
+- msc_entrepreneurial_game_development
+- msc_global_public_health
+- msc_high_performance_computing_quantum_computing
+- msc_life_science_informatics
+- msc_mental_health
+- msc_organisational_and_economic_psychology
+- msc_transformation_and_sustainable_living_space_development_redesigning_tourism
+- msc_vocational_pedagogy_health_and_care
+with_winter_intake:
+- ba_business_administration
+- ba_business_administration_and_management
+- ba_business_administration_and_service_management
+- ba_cosmetic_science_and_management
+- ba_international_management
+- ba_international_tourism_management_health_and_medical_tourism
+- ba_management_of_inclusion_and_participation
+- ba_nursing_pedagogy
+- ba_pedagogy_in_rescue_services
+- ba_security_management
+- ba_social_work
+- ba_tourism_management
+- beng_applied_computer_science
+- beng_building_products_and_processes
+- beng_circular_engineering
+- beng_civil_and_construction_engineering
+- beng_electrical_engineering_and_information_technology
+- beng_electrical_engineering_and_information_technology_international
+- beng_electromobility_autonomous_driving_and_mobile_robotics
+- beng_electromobility_autonomous_driving_and_mobile_robotics_international
+- beng_electronics_engineering_for_artificial_intelligence_international
+- beng_electronics_for_artificial_intelligence
+- beng_energy_systems_engineering
+- beng_engineering_physics
+- beng_environmental_engineering
+- beng_industrial_engineering
+- beng_industrial_engineering_mechatronic_systems
+- beng_mechanical_engineering
+- beng_mechatronics
+- beng_mechatronics_and_project_management_for_digital_production
+- beng_media_technology
+- beng_project_management_in_civil_and_construction_engineering
+- beng_sustainable_systems_engineering
+- beng_technical_design
+- bsc_ai
+- bsc_applied_sports_science
+- bsc_bioinformatics
+- bsc_business_informatics
+- bsc_business_information_systems
+- bsc_cyber_security
+- bsc_economics
+- bsc_emergency_paramedic
+- bsc_ergotherapy
+- bsc_health_informatics
+- bsc_management_in_health_social_and_rescue_services
+- bsc_management_in_rescue_services
+- bsc_nursing
+- bsc_organisational_and_economic_psychology
+- bsc_physician_assistant
+- bsc_physiotherapy_majoring_in_kinesiology_cooperative_studies
+- bsc_software_design
+- bsc_sustainability_governance_and_digitalisation
+- bsc_traffic_sciences
+- ma_human_resource_management
+- ma_international_tourism_development
+- ma_new_management
+- ma_public_management
+- ma_risk_and_compliancemanagement
+- ma_strategic_and_international_management
+- mba_mba_business_development_and_entrepreneurship
+- mba_mba_company_succession
+- mba_mba_general_management
+- meng_applied_ai_for_digital_production_management
+- meng_artificial_intelligence_for_smart_sensors_and_actuators
+- meng_automotive_electronics
+- meng_automotive_software_engineering
+- meng_civil_and_environmental_engineering
+- meng_cyber_security
+- meng_digital_business_engineering
+- meng_healthy_and_sustainable_buildings
+- meng_mechanical_engineering
+- meng_mechatronic_and_cyber_physical_systems
+- meng_mechatronic_and_cyber_physical_systems_2
+- meng_media_technology
+- meng_robotics
+- meng_technology_management
+- msc_applied_computer_science
+- msc_applied_research_in_engineering_sciences
+- msc_applied_sports_science_with_focus_on_interprofessional_care_in_sports
+- msc_artificial_intelligence_and_data_science
+- msc_business_informatics
+- msc_digital_business
+- msc_digital_business_psychology
+- msc_digital_health
+- msc_electrical_engineering_and_information_technology
+- msc_entrepreneurial_game_development
+- msc_global_public_health
+- msc_high_performance_computing_quantum_computing
+- msc_life_science_informatics
+- msc_mental_health
+- msc_organisational_and_economic_psychology
+- msc_transformation_and_sustainable_living_space_development_redesigning_tourism
+- msc_vocational_pedagogy_health_and_care
+with_summer_intake:
+- ba_business_administration
+- ba_business_administration_and_management
+- ba_business_administration_and_service_management
+- ba_cosmetic_science_and_management
+- ba_international_management
+- ba_international_tourism_management_health_and_medical_tourism
+- ba_management_of_inclusion_and_participation
+- ba_nursing_pedagogy
+- ba_pedagogy_in_rescue_services
+- ba_security_management
+- ba_social_work
+- ba_tourism_management
+- beng_applied_computer_science
+- beng_building_products_and_processes
+- beng_circular_engineering
+- beng_civil_and_construction_engineering
+- beng_electrical_engineering_and_information_technology
+- beng_electrical_engineering_and_information_technology_international
+- beng_electromobility_autonomous_driving_and_mobile_robotics
+- beng_electromobility_autonomous_driving_and_mobile_robotics_international
+- beng_electronics_engineering_for_artificial_intelligence_international
+- beng_electronics_for_artificial_intelligence
+- beng_energy_systems_engineering
+- beng_engineering_physics
+- beng_environmental_engineering
+- beng_industrial_engineering
+- beng_industrial_engineering_mechatronic_systems
+- beng_mechanical_engineering
+- beng_mechatronics
+- beng_mechatronics_and_project_management_for_digital_production
+- beng_media_technology
+- beng_project_management_in_civil_and_construction_engineering
+- beng_sustainable_systems_engineering
+- beng_technical_design
+- bsc_ai
+- bsc_applied_sports_science
+- bsc_bioinformatics
+- bsc_business_informatics
+- bsc_business_information_systems
+- bsc_cyber_security
+- bsc_economics
+- bsc_emergency_paramedic
+- bsc_ergotherapy
+- bsc_health_informatics
+- bsc_management_in_health_social_and_rescue_services
+- bsc_management_in_rescue_services
+- bsc_nursing
+- bsc_organisational_and_economic_psychology
+- bsc_physician_assistant
+- bsc_physiotherapy_majoring_in_kinesiology_cooperative_studies
+- bsc_software_design
+- bsc_sustainability_governance_and_digitalisation
+- bsc_traffic_sciences
+by_field:
+  business:
+  - ba_business_administration
+  - ba_business_administration_and_management
+  - ba_business_administration_and_service_management
+  - ba_cosmetic_science_and_management
+  - ba_international_management
+  - ba_international_tourism_management_health_and_medical_tourism
+  - ba_security_management
+  - ba_tourism_management
+  - ma_human_resource_management
+  - ma_international_tourism_development
+  - ma_new_management
+  - ma_public_management
+  - ma_risk_and_compliancemanagement
+  - ma_strategic_and_international_management
+  - mba_mba_business_development_and_entrepreneurship
+  - mba_mba_company_succession
+  - mba_mba_general_management
+  social_sciences:
+  - ba_management_of_inclusion_and_participation
+  - ba_nursing_pedagogy
+  - ba_pedagogy_in_rescue_services
+  - ba_social_work
+  - bsc_economics
+  - bsc_organisational_and_economic_psychology
+  - bsc_traffic_sciences
+  - msc_digital_business_psychology
+  - msc_organisational_and_economic_psychology
+  engineering:
+  - beng_applied_computer_science
+  - beng_building_products_and_processes
+  - beng_circular_engineering
+  - beng_civil_and_construction_engineering
+  - beng_electrical_engineering_and_information_technology
+  - beng_electrical_engineering_and_information_technology_international
+  - beng_electromobility_autonomous_driving_and_mobile_robotics
+  - beng_electromobility_autonomous_driving_and_mobile_robotics_international
+  - beng_electronics_engineering_for_artificial_intelligence_international
+  - beng_electronics_for_artificial_intelligence
+  - beng_energy_systems_engineering
+  - beng_engineering_physics
+  - beng_environmental_engineering
+  - beng_industrial_engineering
+  - beng_industrial_engineering_mechatronic_systems
+  - beng_mechanical_engineering
+  - beng_mechatronics
+  - beng_mechatronics_and_project_management_for_digital_production
+  - beng_project_management_in_civil_and_construction_engineering
+  - beng_sustainable_systems_engineering
+  - beng_technical_design
+  - meng_applied_ai_for_digital_production_management
+  - meng_artificial_intelligence_for_smart_sensors_and_actuators
+  - meng_automotive_electronics
+  - meng_automotive_software_engineering
+  - meng_civil_and_environmental_engineering
+  - meng_cyber_security
+  - meng_digital_business_engineering
+  - meng_healthy_and_sustainable_buildings
+  - meng_mechanical_engineering
+  - meng_mechatronic_and_cyber_physical_systems
+  - meng_mechatronic_and_cyber_physical_systems_2
+  - meng_robotics
+  - meng_technology_management
+  arts:
+  - beng_media_technology
+  - meng_media_technology
+  computer_science:
+  - bsc_ai
+  - bsc_bioinformatics
+  - bsc_business_informatics
+  - bsc_cyber_security
+  - bsc_health_informatics
+  - bsc_software_design
+  - bsc_sustainability_governance_and_digitalisation
+  - meng_cyber_security
+  - msc_business_informatics
+  - msc_entrepreneurial_game_development
+  - msc_high_performance_computing_quantum_computing
+  - msc_life_science_informatics
+  - msc_transformation_and_sustainable_living_space_development_redesigning_tourism
+  health:
+  - bsc_applied_sports_science
+  - bsc_emergency_paramedic
+  - bsc_ergotherapy
+  - bsc_management_in_health_social_and_rescue_services
+  - bsc_nursing
+  - bsc_physiotherapy_majoring_in_kinesiology_cooperative_studies
+  - msc_applied_sports_science_with_focus_on_interprofessional_care_in_sports
+  - msc_digital_health
+  - msc_global_public_health
+  - msc_mental_health
+  - msc_vocational_pedagogy_health_and_care
+  science:
+  - bsc_business_information_systems
+  - bsc_management_in_rescue_services
+  - bsc_physician_assistant
+  - msc_applied_computer_science
+  - msc_applied_research_in_engineering_sciences
+  - msc_artificial_intelligence_and_data_science
+  - msc_digital_business
+  - msc_electrical_engineering_and_information_technology
+  - msc_entrepreneurial_game_development
