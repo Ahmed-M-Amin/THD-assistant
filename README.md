@@ -1,3 +1,6 @@
+**Abdrabou, Ahmed, <22304330>**
+
+
 # 🎓 THD University Assistant
 
 > An intelligent, voice-enabled chatbot for Technische Hochschule Deggendorf (THD) university admissions and program information
@@ -5,6 +8,12 @@
 [![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![Streamlit](https://img.shields.io/badge/streamlit-1.30+-FF4B4B.svg)](https://streamlit.io)
 [![Google Gemini](https://img.shields.io/badge/google-gemini--2.5--flash-4285F4.svg)](https://ai.google.dev/)
+
+
+## Wiki links
+- Home: https://mygit.th-deg.de/aa18330/application-admission-assistant-thd/-/wikis/home
+- Personae: https://mygit.th-deg.de/aa18330/application-admission-assistant-thd/-/wikis/Personae
+- Use cases: https://mygit.th-deg.de/aa18330/application-admission-assistant-thd/-/wikis/Use-cases
 
 
 ## 📋 Overview
