@@ -13,7 +13,7 @@
 ## Wiki links
 - Home: https://mygit.th-deg.de/aa18330/application-admission-assistant-thd/-/wikis/home
 - Personae: https://mygit.th-deg.de/aa18330/application-admission-assistant-thd/-/wikis/Personae
-- Use cases: https://mygit.th-deg.de/aa18330/application-admission-assistant-thd/-/wikis/Use-cases
+- Use cases: https://mygit.th-deg.de/aa18330/application-admission-assistant-thd/-/wikis/Use_Cases
 - Example Dialogs : https://mygit.th-deg.de/aa18330/application-admission-assistant-thd/-/wikis/Example_Dialogs
 - Dialog Flow : https://mygit.th-deg.de/aa18330/application-admission-assistant-thd/-/wikis/Dialog_Flow
 
