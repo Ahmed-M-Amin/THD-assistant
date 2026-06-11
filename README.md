@@ -9,7 +9,7 @@
 
 [![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![Streamlit](https://img.shields.io/badge/streamlit-1.30+-FF4B4B.svg)](https://streamlit.io)
-[![Google Gemini](https://img.shields.io/badge/google-gemini--2.5--flash-4285F4.svg)](https://ai.google.dev/)
+[![Google Gemini](https://img.shields.io/badge/google-gemini--1.5--flash-4285F4.svg)](https://ai.google.dev/)
 
 
 ## Wiki links
@@ -22,7 +22,7 @@
 
 ## 📋 Overview
 
-THD University Assistant is a comprehensive, AI-powered chatbot designed to help prospective students navigate the admissions process at Technische Hochschule Deggendorf. Built with Google's Gemini 2.5 Flash LLM and Streamlit, it provides accurate, context-aware answers about university programs, requirements, fees, and deadlines in both English and German.
+THD University Assistant is a comprehensive, AI-powered chatbot designed to help prospective students navigate the admissions process at Technische Hochschule Deggendorf. Built with Google's Gemini 1.5 Flash LLM and Streamlit, it provides accurate, context-aware answers about university programs, requirements, fees, and deadlines in both English and German.
 
 ### ✨ Key Features
 
@@ -32,8 +32,8 @@ THD University Assistant is a comprehensive, AI-powered chatbot designed to help
 - 🔍 **Advanced Program Search**: Filter and compare programs by degree level, faculty, language, and more
 - 💬 **Session Management**: Persistent chat history with load, save, and delete functionality
 - ⚡ **Response Caching**: Intelligent caching for faster repeated queries
-- 🎯 **Adaptive Responses**: Smart length adjustment - concise for simple questions, detailed for complex ones
-- 🧪 **Comprehensive Testing**: Unit, integration, contract, and end-to-end tests
+- 🎯 **Adaptive Responses**: Smart length adjustment and **Google Search Grounding** for up-to-date university info
+- 🧪 **Comprehensive Testing**: 850+ tests covering unit, data quality, and LLM contracts
 
 ## 🏗️ Architecture
 
@@ -42,9 +42,9 @@ THD University Assistant is a comprehensive, AI-powered chatbot designed to help
 | Component | Technology |
 |-----------|------------|
 | **Web Framework** | Streamlit 1.30+ |
-| **LLM** | Google Gemini 2.5 Flash |
+| **LLM** | Google Gemini 1.5 Flash |
 | **RAG** | Sentence Transformers + scikit-learn |
-| **STT** | Google Cloud Speech + SpeechRecognition |
+| **STT** | SpeechRecognition + WebRTC / Audiorec |
 | **TTS** | Edge-TTS + gTTS |
 | **Data Validation** | Pydantic 2.0+ |
 | **Data Format** | YAML (93 program files) |
@@ -71,7 +71,10 @@ thd-assistant/
 │   ├── response_cache.py     # Response caching logic
 │   ├── stt_engine_speechrecognition.py  # Speech-to-Text
 │   ├── tts_engine_edge.py    # Text-to-Speech
-│   └── local_voice_handler.py  # Microphone interaction
+│   ├── local_voice_handler.py  # Microphone interaction
+│   ├── live_chat_worker.py    # Async live chat handling
+│   └── utils/
+│       └── validate_data.py   # Systematic data review script
 ├── data/
 │   └── programs/             # 93 YAML program files
 ├── config/                    # Configuration files
@@ -81,10 +84,10 @@ thd-assistant/
 ├── assets/                    # UI assets (logo, background)
 ├── tests/                     # Comprehensive test suite
 │   ├── unit/                 # Unit tests
-│   ├── integration/          # Integration tests
-│   ├── contract/             # LLM contract tests
-│   ├── e2e/                  # End-to-end tests
-│   └── data/                 # Data quality tests
+│   ├── contract/             # LLM contract tests (mocked)
+│   ├── data/                 # Data quality tests (838+ tests)
+│   ├── integration/          # Integration tests (Planned)
+│   └── e2e/                  # End-to-end tests (Planned)
 ├── requirements_streamlit.txt  # Web app dependencies
 ├── requirements_gemini.txt     # Gemini API dependencies
 ├── pyproject.toml             # Build configuration
@@ -144,13 +147,15 @@ thd-assistant/
    # Edit .env and add your API keys
    ```
 
-   Required `.env` contents:
+   Required `.env` contents (see `.env.example` for all options):
    ```env
    # Google Gemini API
    GEMINI_API_KEY=your_gemini_api_key_here
+   GEMINI_MODEL_NAME=gemini-1.5-flash
    
-   # Optional: Google Cloud Speech-to-Text
-   GOOGLE_APPLICATION_CREDENTIALS=path/to/service-account-key.json
+   # Optional: Performance & UI
+   ENABLE_RESPONSE_CACHE=true
+   LOG_LEVEL=INFO
    ```
 
 ## 💻 Usage
@@ -202,9 +207,9 @@ python -m pytest
 
 # Run specific test categories
 python -m pytest tests/unit/          # Unit tests
-python -m pytest tests/integration/   # Integration tests
+python -m pytest tests/integration/   # Integration tests (Planned)
 python -m pytest tests/contract/      # LLM contract tests
-python -m pytest tests/data/          # Data quality tests
+python -m pytest tests/data/          # Data quality tests (838+ tests)
 
 # Run with verbose output
 python -m pytest -v
@@ -214,11 +219,11 @@ python -m pytest -m "data_quality"
 ```
 
 **Test Coverage:**
-- ✅ 664 tests passing
-- ✅ 93 YAML files validated
-- ✅ LLM contract tests (no API costs)
-- ✅ Unit tests for all core modules
-- ✅ Integration tests for conversation flow
+- ✅ 850+ tests passing
+- ✅ 93 YAML files validated via systematic review
+- ✅ LLM contract tests (validates prompts & response handling)
+- ✅ Unit tests for core models and session management
+- ⏳ Integration & E2E tests (Planned/Under Development)
 
 ## 📊 Data Management
 
@@ -247,8 +252,8 @@ python -m pytest tests/data/test_yaml_validation.py -v
 ```python
 PROGRAMS_DATA_PATH = "data/programs"  # YAML program files
 CONFIG_PATH = "config/content_index.yaml"  # Program index
-MODEL_NAME = "gemini-2.5-flash"  # LLM model
-MAX_TOKENS = 2048  # Response length limit
+GEMINI_MODEL_NAME = "gemini-1.5-flash"  # LLM model
+LLM_MAX_TOKENS = 1024  # Response length limit
 ```
 
 ### Environment Variables
@@ -256,7 +261,7 @@ MAX_TOKENS = 2048  # Response length limit
 | Variable | Description | Required |
 |----------|-------------|----------|
 | `GEMINI_API_KEY` | Google Gemini API key | ✅ Yes |
-| `GOOGLE_APPLICATION_CREDENTIALS` | Google Cloud credentials path | ❌ Optional (for Google STT) |
+| `GEMINI_MODEL_NAME` | Name of the Gemini model to use | ❌ Optional |
 
 ## 🤝 Contributing
 

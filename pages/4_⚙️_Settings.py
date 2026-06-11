@@ -96,16 +96,22 @@ with col2:
             **German Students**
             - German citizens or permanent residents
             - No tuition fees
-            - Only semester contribution (~€82)
+            - Application fee: €60 (one-time)
+            - Semester contribution: €82 (student union fee)
             
             **EU/EEA Students**
             - Citizens of EU or EEA countries
             - Same benefits as German students
-            - No tuition fees
+            - Application fee: €60 (one-time)
+            - Semester contribution: €82 (student union fee)
             
             **International Students**
             - Students from outside EU/EEA
-            - May have service fees (~€500/semester)
+            - No tuition fees
+            - Application fee: €60 (one-time)
+            - Service fee: €500/semester
+            - Student union fee: €82/semester
+            - Total per semester: €582
             - Additional requirements (visa, language certificates)
             """)
     else:
@@ -143,16 +149,22 @@ with col2:
             **Deutsche Studenten**
             - Deutsche Staatsbürger oder Daueraufenthaltsberechtigte
             - Keine Studiengebühren
-            - Nur Semesterbeitrag (~€82)
+            - Bewerbungsgebühr: €60 (einmalig)
+            - Semesterbeitrag: €82 (Studentenwerk)
             
             **EU/EWR-Studenten**
             - Bürger von EU- oder EWR-Ländern
             - Gleiche Vorteile wie deutsche Studenten
-            - Keine Studiengebühren
+            - Bewerbungsgebühr: €60 (einmalig)
+            - Semesterbeitrag: €82 (Studentenwerk)
             
             **Internationale Studenten**
             - Studenten von außerhalb der EU/EWR
-            - Möglicherweise Servicegebühren (~€500/Semester)
+            - Keine Studiengebühren
+            - Bewerbungsgebühr: €60 (einmalig)
+            - Servicegebühr: €500/Semester
+            - Studentenwerksbeitrag: €82/Semester
+            - Gesamt pro Semester: €582
             - Zusätzliche Anforderungen (Visum, Sprachzertifikate)
             """)
 

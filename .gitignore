@@ -19,6 +19,10 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+.python-version
+.mypy_cache/
+.pyre_configuration
+.ruff_cache/
 
 # Virtual environments
 .venv/
@@ -35,6 +39,8 @@ models/
 # Environment
 .env
 .env.local
+.env.*
+!.env.example
 
 # IDE
 .vscode/
@@ -42,12 +48,18 @@ models/
 *.swp
 *.swo
 *~
+.history/
 
 # Testing
 .pytest_cache/
 .coverage
 htmlcov/
 .tox/
+.noseids
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
 
 # Logs
 *.log
@@ -56,6 +68,7 @@ logs/
 # OS
 .DS_Store
 Thumbs.db
+desktop.ini
 
 # Audio files
 *.wav
@@ -67,6 +80,7 @@ Thumbs.db
 tmp/
 temp/
 *.tmp
+New folder*/
 
 # Project-specific exclusions
 backups/
@@ -86,3 +100,4 @@ service-account.json
 
 # Private files
 main.py
+application-admission-assistant-thd.wiki/ 

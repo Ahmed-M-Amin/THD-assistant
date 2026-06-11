@@ -164,7 +164,7 @@ if st.session_state.language == "EN":
             """
         <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; height: 280px;">
             <div style="font-size: 48px; margin-bottom: 15px;">🎤</div>
-            <h3 style="color: #667eea; margin-bottom: 15px;">Speech Chat</h3>
+            <h3 style="color: #667eea; margin-bottom: 15px;">Chat</h3>
             <p style="color: #666; line-height: 1.6;">
                 Ask questions using text or voice. 
                 Get instant, accurate AI-powered answers.

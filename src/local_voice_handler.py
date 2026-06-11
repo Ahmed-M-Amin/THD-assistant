@@ -46,12 +46,12 @@ class LocalVoiceHandler:
         self.sample_rate = sample_rate
         self.recognizer = sr.Recognizer()
 
-        # Settings for voice detection (tuned for patience)
-        self.recognizer.energy_threshold = 300
-        self.recognizer.dynamic_energy_threshold = False
-        self.recognizer.pause_threshold = 2.0
+        # Settings for voice detection (tuned for patience and higher sensitivity)
+        self.recognizer.energy_threshold = 150  # Lowered to 150 to catch quieter speech
+        self.recognizer.dynamic_energy_threshold = True  # Enabled to adapt to environment
+        self.recognizer.pause_threshold = 3.5  # Waits 3.5 seconds of silence before cutting off
         self.recognizer.phrase_threshold = 0.3
-        self.recognizer.non_speaking_duration = 0.3
+        self.recognizer.non_speaking_duration = 0.8  # Keeps more audio at start/end so it doesn't clip
 
         logger.info(
             f"LocalVoiceHandler initialized (Google Speech, sample_rate: {sample_rate})"
@@ -74,7 +74,7 @@ class LocalVoiceHandler:
             # Use default microphone (device_index=None)
             with sr.Microphone(sample_rate=self.sample_rate) as source:
                 logger.info("Adjusting for ambient noise...")
-                self.recognizer.adjust_for_ambient_noise(source, duration=1)
+                self.recognizer.adjust_for_ambient_noise(source, duration=0.5)
 
                 logger.info(f"🎤 Listening... (language: {google_language})")
 
@@ -118,18 +118,76 @@ class LocalVoiceHandler:
             logger.error(f"Microphone error: {e}")
             raise AudioDeviceError(str(e))
 
+    def _decode_audio(self, audio_bytes):
+        """Decode audio bytes to mono float32 suitable for playback."""
+        import io
+        import soundfile as sf
+
+        audio_data, sr_rate = sf.read(io.BytesIO(audio_bytes), dtype="float32")
+        if audio_data.ndim > 1:
+            audio_data = audio_data.mean(axis=1)
+
+        peak = float(np.max(np.abs(audio_data))) if audio_data.size else 0.0
+        if peak > 1.0:
+            audio_data = audio_data / peak * 0.95
+        elif 0.0 < peak < 0.2:
+            audio_data = audio_data / peak * 0.9
+
+        return np.ascontiguousarray(audio_data, dtype=np.float32), int(sr_rate)
+
     def play_audio(self, audio_bytes):
-        """Play audio through speakers."""
+        """Play audio through speakers (blocking until finished)."""
+        self.play_audio_interruptible(audio_bytes)
+
+    def play_audio_interruptible(self, audio_bytes, stop_event=None) -> bool:
+        """
+        Play audio and optionally stop when stop_event is set.
+        Returns True if playback finished, False if interrupted.
+        """
         try:
-            import io
-            import soundfile as sf
+            audio_data, sr_rate = self._decode_audio(audio_bytes)
+            if audio_data.size == 0:
+                logger.warning("No audio samples to play")
+                return True
 
-            audio_data, sr_rate = sf.read(io.BytesIO(audio_bytes))
-            audio_data = audio_data * 1.5
-            audio_data = np.clip(audio_data, -1.0, 1.0)
+            duration = len(audio_data) / float(sr_rate)
+            logger.info(f"Playing {duration:.1f}s of audio at {sr_rate} Hz")
 
-            sd.play(audio_data, sr_rate)
-            sd.wait()
+            chunk_size = 4096
+            with sd.OutputStream(
+                samplerate=sr_rate,
+                channels=1,
+                dtype="float32",
+                blocksize=chunk_size,
+            ) as stream:
+                for start in range(0, len(audio_data), chunk_size):
+                    if stop_event is not None and stop_event.is_set():
+                        break
+                    stream.write(audio_data[start : start + chunk_size])
 
+            if stop_event is not None and stop_event.is_set():
+                return False
+            return True
         except Exception as e:
             logger.error(f"Play audio error: {e}")
+            return False
+
+    def play_audio_nonblocking(self, audio_bytes):
+        """Start audio playback without blocking."""
+        try:
+            audio_data, sr_rate = self._decode_audio(audio_bytes)
+            sd.play(audio_data, sr_rate)
+        except Exception as e:
+            logger.error(f"Play audio error: {e}")
+
+    def is_playing(self) -> bool:
+        """Return True while speaker output is active."""
+        try:
+            stream = sd.get_stream()
+            return stream is not None and stream.active
+        except Exception:
+            return False
+
+    def stop_playback(self):
+        """Stop any in-progress speaker output."""
+        pass  # Handled gracefully via stop_event now to prevent Windows driver stutter

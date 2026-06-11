@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 from pathlib import Path
 import sys
 import logging
@@ -17,6 +18,7 @@ from src.tts_engine_edge import EdgeTTSEngine
 from src.data_store import ProgramDataStore
 from src.config import settings
 from src.local_voice_handler import LocalVoiceHandler, AudioDeviceError
+from src.live_chat_worker import LiveChatWorker
 from src.session_manager import SessionManager
 
 # Page config
@@ -142,15 +144,12 @@ with st.sidebar:
 # --- 4. MAIN UI START ---
 st.title("🤖 THD Assistant" if language == "EN" else "🤖 THD Assistent")
 
+# Initialize live chat state if missing
+if "live_chat_active" not in st.session_state:
+    st.session_state.live_chat_active = False
+
 # Sync chat_history with current_session messages (Double Binding)
 st.session_state.chat_history = st.session_state.current_session["messages"]
-
-# Chat mode selection
-mode = st.radio(
-    "Chat Mode:" if language == "EN" else "Chat-Modus:",
-    ["💬 Text Chat", "🎤 Live Chat"],
-    horizontal=True,
-)
 
 # Display chat history from Session
 for msg in st.session_state.current_session["messages"]:
@@ -163,22 +162,133 @@ def save_chat_update():
     sess_mgr.save_session(st.session_state.current_session)
 
 
-# ========== TEXT CHAT MODE ==========
-if mode == "💬 Text Chat":
+def reset_live_chat_state():
+    """Clear live-mode state, stop worker, and stop any audio playback."""
+    worker = st.session_state.get("live_chat_worker")
+    if worker is not None:
+        worker.stop()
+    st.session_state.pop("live_chat_worker", None)
+    if "voice_handler" in st.session_state:
+        st.session_state.voice_handler.stop_playback()
+
+
+def get_live_chat_worker() -> LiveChatWorker:
+    if "voice_handler" not in st.session_state:
+        st.session_state.voice_handler = LocalVoiceHandler()
+
+    session = st.session_state.current_session
+    worker = st.session_state.get("live_chat_worker")
+    if worker is None:
+        worker = LiveChatWorker(
+            voice_handler=st.session_state.voice_handler,
+            manager=manager,
+            language=language.lower(),
+            session=session,
+            save_session=lambda: sess_mgr.save_session(session),
+        )
+        worker.start()
+        st.session_state.live_chat_worker = worker
+    return worker
+
+
+
+# ===== SHARED CSS: mic / stop button floated inside the chat input bar =====
+is_live = st.session_state.live_chat_active
+
+# In text mode the button label is "🎤"; in live mode it is "⏹ Stop"
+# Streamlit sets aria-label = the button text, so we target it directly.
+st.markdown("""
+<style>
+/* --- Mic button (text mode) ------------------------------------------ */
+button[aria-label="🎤"] {
+    position: fixed !important;
+    bottom: 17px !important;
+    right: 70px !important;
+    z-index: 10000 !important;
+    background: transparent !important;
+    border: none !important;
+    font-size: 1.35rem !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+    color: #888 !important;
+    border-radius: 50% !important;
+    box-shadow: none !important;
+    min-height: unset !important;
+    height: 36px !important;
+    width: 36px !important;
+    line-height: 36px !important;
+    transition: color 0.2s, background 0.2s !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+button[aria-label="🎤"]:hover {
+    color: #ff4b4b !important;
+    background: rgba(255,75,75,0.12) !important;
+}
+
+/* --- Stop button (live mode) ------------------------------------------ */
+button[aria-label="⏹ Stop"] {
+    position: fixed !important;
+    bottom: 17px !important;
+    right: 70px !important;
+    z-index: 10000 !important;
+    background: #ff4b4b !important;
+    border: none !important;
+    color: #fff !important;
+    font-size: 1.1rem !important;
+    font-weight: 700 !important;
+    border-radius: 50% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+    height: 36px !important;
+    width: 36px !important;
+    min-height: unset !important;
+    box-shadow: 0 0 10px rgba(255,75,75,0.5) !important;
+    animation: stop-pulse 1.4s ease-in-out infinite !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 36px !important;
+    transition: background 0.2s !important;
+}
+button[aria-label="⏹ Stop"]:hover {
+    background: #cc2222 !important;
+    animation: none !important;
+}
+@keyframes stop-pulse {
+    0%, 100% { box-shadow: 0 0 6px  rgba(255,75,75,0.5); }
+    50%       { box-shadow: 0 0 18px rgba(255,75,75,0.9); }
+}
+
+/* --- Breathing room for messages above the bar ----------------------- */
+section[data-testid="stMain"] > div {
+    padding-bottom: 80px !important;
+}
+</style>
+""", unsafe_allow_html=True)
+
+
+# ========== TEXT CHAT MODE (default) ==========
+if not is_live:
+    # Mic button — CSS above floats it inside the chat input bar
+    if st.button("🎤", help="Start Live Voice Chat" if language == "EN" else "Live-Sprach-Chat starten"):
+        reset_live_chat_state()
+        st.session_state.live_chat_active = True
+        st.rerun()
+
     if prompt := st.chat_input(
         "Type your question..." if language == "EN" else "Geben Sie Ihre Frage ein..."
     ):
-        # Display user message
         st.session_state.current_session["messages"].append(
             {"role": "user", "content": prompt}
         )
         with st.chat_message("user"):
             st.write(prompt)
-
-        # Save immediately (User msg)
         save_chat_update()
 
-        # Get response
         with st.chat_message("assistant"):
             with st.spinner("Thinking..." if language == "EN" else "Denke nach..."):
                 try:
@@ -187,110 +297,49 @@ if mode == "💬 Text Chat":
                     st.session_state.current_session["messages"].append(
                         {"role": "assistant", "content": response}
                     )
-                    # Save immediately (Assistant msg)
                     save_chat_update()
-
                 except Exception as e:
                     st.error(f"Error: {e}")
 
 # ========== LIVE CHAT MODE ==========
-else:  # Live Chat
-    st.info(
-        "🎤 **Live Chat Mode**\\n\\n"
-        "Click 'Start' → Speak when ready → Bot responds → Automatically listens again"
-        if language == "EN"
-        else "🎤 **Live-Chat-Modus**\\n\\n"
-        "Klicken Sie auf 'Start' → Sprechen Sie, wenn bereit → Bot antwortet → Hört automatisch wieder zu"
-    )
+else:
+    if st.button("⏹ Stop", help="Stop Live Chat and return to text mode" if language == "EN" else "Live-Chat beenden und zum Textmodus zurückkehren"):
+        reset_live_chat_state()
+        st.session_state.live_chat_active = False
+        st.rerun()
 
-    col1, col2 = st.columns(2)
-    with col1:
-        if not st.session_state.get("live_chat_active"):
-            if st.button("▶️ Start Live Chat", type="primary", use_container_width=True):
-                st.session_state.live_chat_active = True
-                st.rerun()
+    worker = get_live_chat_worker()
+
+    status_labels = {
+        "starting": ("### 🔴 Starting live chat...", "### 🔴 Live-Chat startet..."),
+        "listening": ("### 🔴 Listening… Speak now!", "### 🔴 Hört zu… Sprechen Sie jetzt!"),
+        "thinking": ("### 🧠 Thinking...", "### 🧠 Denke nach..."),
+        "speaking": ("### 🗣️ Speaking...", "### 🗣️ Spricht..."),
+        "no_voice": (
+            "No voice detected. Try speaking again.",
+            "Keine Stimme erkannt. Bitte erneut sprechen.",
+        ),
+        "unclear": (
+            "Could not understand audio. Try speaking louder/clearer.",
+            "Audio nicht verstanden. Bitte lauter/deutlicher sprechen.",
+        ),
+    }
+
+    idx = 0 if language == "EN" else 1
+    if worker.error:
+        st.error(f"Error: {worker.error}")
+        reset_live_chat_state()
+        st.session_state.live_chat_active = False
+    elif worker.status in ("stopped", "error"):
+        reset_live_chat_state()
+        st.session_state.live_chat_active = False
+        st.rerun()
+    else:
+        label = status_labels.get(worker.status, status_labels["listening"])[idx]
+        if worker.status in ("no_voice", "unclear"):
+            st.warning(label)
         else:
-            if st.button("⏹️ Stop Live Chat", use_container_width=True):
-                st.session_state.live_chat_active = False
-                st.rerun()
+            st.markdown(label)
 
-    if st.session_state.get("live_chat_active"):
-        # Initialize voice handler
-        if "voice_handler" not in st.session_state:
-            st.session_state.voice_handler = LocalVoiceHandler()
-
-        status = st.empty()
-        try:
-            status.markdown("### 🔴 Listening... Speak now!")
-
-            # Listen
-            text, audio_data = st.session_state.voice_handler.listen_once(
-                listen_timeout=30.0, language=language.lower()
-            )
-
-            if text is None:
-                status.warning("No voice detected. Try speaking again.")
-                time.sleep(2)
-                st.rerun()
-            elif text == "":
-                status.error("Could not understand audio. Try speaking louder/clearer.")
-                time.sleep(2)
-                st.rerun()
-            else:
-                # Goodbye check
-                goodbye_phrases = [
-                    "goodbye",
-                    "bye",
-                    "exit",
-                    "quit",
-                    "stop",
-                    "tschüss",
-                    "auf wiedersehen",
-                ]
-                if any(p in text.lower() for p in goodbye_phrases):
-                    goodbye_msg = "Goodbye!"
-                    st.session_state.current_session["messages"].append(
-                        {"role": "user", "content": text}
-                    )
-                    st.session_state.current_session["messages"].append(
-                        {"role": "assistant", "content": goodbye_msg}
-                    )
-                    save_chat_update()  # Save goodbye
-                    st.session_state.live_chat_active = False
-                    st.rerun()
-
-                # User Msg
-                st.session_state.current_session["messages"].append(
-                    {"role": "user", "content": text}
-                )
-                with st.chat_message("user"):
-                    st.write(text)
-                save_chat_update()
-
-                # Processor
-                status.markdown("### 🧠 Thinking...")
-                response, audio_response = manager.process_text_query(
-                    text, language.lower()
-                )
-
-                # Assistant Msg
-                st.session_state.current_session["messages"].append(
-                    {"role": "assistant", "content": response}
-                )
-                with st.chat_message("assistant"):
-                    st.write(response)
-                save_chat_update()
-
-                # Speak
-                status.markdown("### 🗣️ Speaking...")
-                if audio_response:
-                    st.session_state.voice_handler.play_audio(audio_response)
-
-                st.rerun()
-
-        except AudioDeviceError as e:
-            status.error(f"Microphone error: {e}")
-            st.session_state.live_chat_active = False
-        except Exception as e:
-            status.error(f"Error: {e}")
-            logging.error(f"Live chat error: {e}", exc_info=True)
+        time.sleep(1.0)
+        st.rerun()

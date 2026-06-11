@@ -176,10 +176,18 @@ with col1:
             st.markdown("### ⚡ Schnelle Fakten")
 
         # Filter out fee-related quick facts (fees are shown dynamically in sidebar)
-        fee_keywords = ["€82", "semester contribution", "tuition fee", "No tuition"]
+        fee_keywords = [
+            "€82",
+            "€500",
+            "semester contribution",
+            "tuition fee",
+            "No tuition",
+            "service fee",
+            "non-EU students",
+        ]
         for fact in selected_program.quick_facts:
             # Skip facts that contain fee-related keywords
-            if not any(keyword in fact for keyword in fee_keywords):
+            if not any(keyword.lower() in fact.lower() for keyword in fee_keywords):
                 st.markdown(f"✓ {fact}")
 
         st.markdown("---")
@@ -507,51 +515,97 @@ with col2:
 
     # Get student category from session state
     student_category = st.session_state.get("student_category", "EU/EEA")
-    
+
     # Debug: Show current category
     # st.write(f"DEBUG: Current category = '{student_category}'")
 
     # Fixed fees for THD (same for all programs)
     if student_category == "International":
-        category_label = "International (Non-EU)" if language == "EN" else "International (Nicht-EU)"
-        st.info(f"📊 {('Showing fees for' if language == 'EN' else 'Gebühren für')}: **{category_label}**")
-        
-        st.markdown("**" + ("One-Time Fees:" if language == "EN" else "Einmalige Gebühren:") + "**")
-        st.markdown(f"- {('Application Fee' if language == 'EN' else 'Bewerbungsgebühr')}: €60")
+        category_label = (
+            "International (Non-EU)" if language == "EN" else "International (Nicht-EU)"
+        )
+        st.info(
+            f"📊 {('Showing fees for' if language == 'EN' else 'Gebühren für')}: **{category_label}**"
+        )
+
+        st.markdown(
+            "**"
+            + ("One-Time Fees:" if language == "EN" else "Einmalige Gebühren:")
+            + "**"
+        )
+        st.markdown(
+            f"- {('Application Fee' if language == 'EN' else 'Bewerbungsgebühr')}: €60"
+        )
         st.markdown("")
-        
-        st.markdown("**" + ("Per Semester:" if language == "EN" else "Pro Semester:") + "**")
+
+        st.markdown(
+            "**" + ("Per Semester:" if language == "EN" else "Pro Semester:") + "**"
+        )
         st.markdown(f"- {('Tuition' if language == 'EN' else 'Studiengebühren')}: €0")
-        st.markdown(f"- {('Service Fee' if language == 'EN' else 'Servicegebühr')}: €500")
-        st.markdown(f"- {('Student Union' if language == 'EN' else 'Studentenwerk')}: €82")
-        st.markdown(f"- **{('Total per semester' if language == 'EN' else 'Gesamt pro Semester')}: €582**")
-        
+        st.markdown(
+            f"- {('Service Fee' if language == 'EN' else 'Servicegebühr')}: €500"
+        )
+        st.markdown(
+            f"- {('Student Union' if language == 'EN' else 'Studentenwerk')}: €82"
+        )
+        st.markdown(
+            f"- **{('Total per semester' if language == 'EN' else 'Gesamt pro Semester')}: €582**"
+        )
+
     elif student_category == "EU/EEA":
         category_label = "EU/EEA"
-        st.info(f"📊 {('Showing fees for' if language == 'EN' else 'Gebühren für')}: **{category_label}**")
-        
-        st.markdown("**" + ("One-Time Fees:" if language == "EN" else "Einmalige Gebühren:") + "**")
-        st.markdown(f"- {('Application Fee' if language == 'EN' else 'Bewerbungsgebühr')}: €60")
+        st.info(
+            f"📊 {('Showing fees for' if language == 'EN' else 'Gebühren für')}: **{category_label}**"
+        )
+
+        st.markdown(
+            "**"
+            + ("One-Time Fees:" if language == "EN" else "Einmalige Gebühren:")
+            + "**"
+        )
+        st.markdown(
+            f"- {('Application Fee' if language == 'EN' else 'Bewerbungsgebühr')}: €60"
+        )
         st.markdown("")
-        
-        st.markdown("**" + ("Per Semester:" if language == "EN" else "Pro Semester:") + "**")
+
+        st.markdown(
+            "**" + ("Per Semester:" if language == "EN" else "Pro Semester:") + "**"
+        )
         st.markdown(f"- {('Tuition' if language == 'EN' else 'Studiengebühren')}: €0")
-        st.markdown(f"- {('Student Union' if language == 'EN' else 'Studentenwerk')}: €82")
-        st.markdown(f"- **{('Total per semester' if language == 'EN' else 'Gesamt pro Semester')}: €82**")
-        
+        st.markdown(
+            f"- {('Student Union' if language == 'EN' else 'Studentenwerk')}: €82"
+        )
+        st.markdown(
+            f"- **{('Total per semester' if language == 'EN' else 'Gesamt pro Semester')}: €82**"
+        )
+
     else:  # German
         category_label = "German" if language == "EN" else "Deutsch"
-        st.info(f"📊 {('Showing fees for' if language == 'EN' else 'Gebühren für')}: **{category_label}**")
-        
-        st.markdown("**" + ("One-Time Fees:" if language == "EN" else "Einmalige Gebühren:") + "**")
-        st.markdown(f"- {('Application Fee' if language == 'EN' else 'Bewerbungsgebühr')}: €60")
+        st.info(
+            f"📊 {('Showing fees for' if language == 'EN' else 'Gebühren für')}: **{category_label}**"
+        )
+
+        st.markdown(
+            "**"
+            + ("One-Time Fees:" if language == "EN" else "Einmalige Gebühren:")
+            + "**"
+        )
+        st.markdown(
+            f"- {('Application Fee' if language == 'EN' else 'Bewerbungsgebühr')}: €60"
+        )
         st.markdown("")
-        
-        st.markdown("**" + ("Per Semester:" if language == "EN" else "Pro Semester:") + "**")
+
+        st.markdown(
+            "**" + ("Per Semester:" if language == "EN" else "Pro Semester:") + "**"
+        )
         st.markdown(f"- {('Tuition' if language == 'EN' else 'Studiengebühren')}: €0")
-        st.markdown(f"- {('Student Union' if language == 'EN' else 'Studentenwerk')}: €82")
-        st.markdown(f"- **{('Total per semester' if language == 'EN' else 'Gesamt pro Semester')}: €82**")
-    
+        st.markdown(
+            f"- {('Student Union' if language == 'EN' else 'Studentenwerk')}: €82"
+        )
+        st.markdown(
+            f"- **{('Total per semester' if language == 'EN' else 'Gesamt pro Semester')}: €82**"
+        )
+
     st.markdown("---")
 
     # ========================================================================
