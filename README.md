@@ -1,295 +1,211 @@
-**Abdrabou, Ahmed, <22304330>** 
+# THD University Assistant
 
-***Project Repository:*** : https://mygit.th-deg.de/aa18330/application-admission-assistant-thd
-
-
-# 🎓 THD University Assistant
-
-> An intelligent, voice-enabled chatbot for Technische Hochschule Deggendorf (THD) university admissions and program information
-
-[![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
-[![Streamlit](https://img.shields.io/badge/streamlit-1.30+-FF4B4B.svg)](https://streamlit.io)
-[![Google Gemini](https://img.shields.io/badge/google-gemini--1.5--flash-4285F4.svg)](https://ai.google.dev/)
+Voice- and text-enabled admission guidance for Technische Hochschule Deggendorf (THD), built as a Streamlit multi-page app with Gemini, semantic program retrieval, and local session storage.
 
 
-## Wiki links
-- Home: https://mygit.th-deg.de/aa18330/application-admission-assistant-thd/-/wikis/home
-- Personae: https://mygit.th-deg.de/aa18330/application-admission-assistant-thd/-/wikis/Personae
-- Use cases: https://mygit.th-deg.de/aa18330/application-admission-assistant-thd/-/wikis/Use_Cases
-- Example Dialogs : https://mygit.th-deg.de/aa18330/application-admission-assistant-thd/-/wikis/Example_Dialogs
-- Dialog Flow : https://mygit.th-deg.de/aa18330/application-admission-assistant-thd/-/wikis/Dialog_Flow
 
+## What the project does
 
-## 📋 Overview
+The assistant helps prospective students explore THD study programs and ask admission-related questions in English or German. It combines a local knowledge base of 93 YAML program files with Gemini-generated answers, optional voice interaction, and a persistent chat history.
 
-THD University Assistant is a comprehensive, AI-powered chatbot designed to help prospective students navigate the admissions process at Technische Hochschule Deggendorf. Built with Google's Gemini 1.5 Flash LLM and Streamlit, it provides accurate, context-aware answers about university programs, requirements, fees, and deadlines in both English and German.
+Core capabilities:
 
-### ✨ Key Features
+- Browse and filter 93 THD programs from the Streamlit UI.
+- Open a detailed program page with fees, deadlines, contacts, and eligibility data.
+- Ask questions in text chat.
+- Start a live voice loop that listens, answers, and speaks back.
+- Reuse previous answers through a semantic response cache.
+- Save, reload, auto-title, and delete chat sessions from `data/sessions/`.
 
-- 🎤 **Voice Interaction**: Speak naturally using Speech-to-Text (STT) and hear responses via Text-to-Speech (TTS)
-- 🧠 **RAG-Powered Intelligence**: Retrieval-Augmented Generation using 93 YAML program files for accurate, data-grounded responses
-- 🌍 **Bilingual Support**: Seamless English and German language support
-- 🔍 **Advanced Program Search**: Filter and compare programs by degree level, faculty, language, and more
-- 💬 **Session Management**: Persistent chat history with load, save, and delete functionality
-- ⚡ **Response Caching**: Intelligent caching for faster repeated queries
-- 🎯 **Adaptive Responses**: Smart length adjustment and **Google Search Grounding** for up-to-date university info
-- 🧪 **Comprehensive Testing**: 850+ tests covering unit, data quality, and LLM contracts
+## Current architecture
 
-## 🏗️ Architecture
+The app is organized as a Streamlit multi-page frontend plus Python service modules in `src/`.
 
-### Tech Stack
+Main flow:
 
-| Component | Technology |
-|-----------|------------|
-| **Web Framework** | Streamlit 1.30+ |
-| **LLM** | Google Gemini 1.5 Flash |
-| **RAG** | Sentence Transformers + scikit-learn |
-| **STT** | SpeechRecognition + WebRTC / Audiorec |
-| **TTS** | Edge-TTS + gTTS |
-| **Data Validation** | Pydantic 2.0+ |
-| **Data Format** | YAML (93 program files) |
-| **Caching** | diskcache |
-| **Testing** | pytest + pytest-mock |
+1. The user opens the app through `Home.py`.
+2. `ProgramDataStore` loads the YAML program catalog from `data/programs/`.
+3. The assistant page creates `ConversationManager`, `GeminiLLMEngine`, speech-to-text, and text-to-speech components.
+4. For each query, the system checks `ResponseCache` first.
+5. On a cache miss, `ProgramDataStore` performs semantic retrieval with `sentence-transformers`.
+6. Retrieved program data is injected into the Gemini prompt.
+7. The response is returned as text and, when enabled, synthesized with Edge TTS.
+8. Chat messages are persisted as JSON session files.
 
-### Project Structure
+## Repository structure
 
-```
-thd-assistant/
-├── Home.py                    # Main Streamlit entry point
-├── pages/                     # Streamlit multi-page app
-│   ├── 1_🔍_Program_Search.py
-│   ├── 2_📋_Program_Details.py
-│   ├── 3_🤖_Assistant.py
-│   └── 4_⚙️_Settings.py
-├── src/                       # Core application logic
-│   ├── config.py             # Application settings
-│   ├── models.py             # Pydantic data models
-│   ├── data_store.py         # YAML data management
-│   ├── llm_engine_gemini.py  # Gemini LLM integration + RAG
-│   ├── conversation_manager.py  # Conversation flow orchestration
-│   ├── session_manager.py    # Chat session persistence
-│   ├── response_cache.py     # Response caching logic
-│   ├── stt_engine_speechrecognition.py  # Speech-to-Text
-│   ├── tts_engine_edge.py    # Text-to-Speech
-│   ├── local_voice_handler.py  # Microphone interaction
-│   ├── live_chat_worker.py    # Async live chat handling
-│   └── utils/
-│       └── validate_data.py   # Systematic data review script
-├── data/
-│   └── programs/             # 93 YAML program files
-├── config/                    # Configuration files
-│   ├── content_index.yaml    # Program index
-│   ├── program_features.yaml # Feature definitions
-│   └── query_patterns.yaml   # Query classification patterns
-├── assets/                    # UI assets (logo, background)
-├── tests/                     # Comprehensive test suite
-│   ├── unit/                 # Unit tests
-│   ├── contract/             # LLM contract tests (mocked)
-│   ├── data/                 # Data quality tests (838+ tests)
-│   ├── integration/          # Integration tests (Planned)
-│   └── e2e/                  # End-to-end tests (Planned)
-├── requirements_streamlit.txt  # Web app dependencies
-├── requirements_gemini.txt     # Gemini API dependencies
-├── pyproject.toml             # Build configuration
-├── pytest.ini                 # Test configuration
-└── .env.example              # Environment variable template
+```text
+.
+|-- Home.py
+|-- pages/
+|   |-- 1_Program_Search
+|   |-- 2_Program_Details
+|   |-- 3_Assistant
+|   `-- 4_Settings
+|-- src/
+|   |-- config.py
+|   |-- conversation_manager.py
+|   |-- data_store.py
+|   |-- llm_engine_gemini.py
+|   |-- live_chat_worker.py
+|   |-- local_voice_handler.py
+|   |-- models.py
+|   |-- response_cache.py
+|   |-- session_manager.py
+|   |-- stt_engine_speechrecognition.py
+|   |-- tts_engine_edge.py
+|   `-- utils/validate_data.py
+|-- config/
+|   |-- content_index.yaml
+|   |-- program_features.yaml
+|   `-- query_patterns.yaml
+|-- data/
+|   |-- programs/
+|   |-- cache/
+|   `-- sessions/
+|-- tests/
+|   |-- contract/
+|   |-- data/
+|   `-- unit/
+`-- application-admission-assistant-thd.wiki/
 ```
 
-## 🚀 Getting Started
+## Key modules
+
+- `Home.py`: landing page, language/category state, background styling, and initial data-store loading.
+- `pages/1_..._Program_Search.py`: program listing, filtering, pagination, and selection.
+- `pages/2_..._Program_Details.py`: detailed program view with category-aware fee display.
+- `pages/3_..._Assistant.py`: chat UI, live voice mode, session history sidebar, and assistant wiring.
+- `pages/4_..._Settings.py`: language, student category, and basic app status.
+- `src/data_store.py`: YAML loading plus semantic search over program metadata.
+- `src/llm_engine_gemini.py`: Gemini prompt construction, program-context injection, and Google Search tool usage.
+- `src/conversation_manager.py`: cache lookup, LLM request orchestration, context tracking, and TTS cleanup.
+- `src/response_cache.py`: exact and semantic response cache backed by `diskcache` when available.
+- `src/session_manager.py`: local JSON session CRUD in `data/sessions/`.
+- `src/live_chat_worker.py`: background live-chat loop for hands-free voice interaction.
+
+## Technologies in use
+
+- Python 3.9+
+- Streamlit
+- Google Gemini via `google-genai`
+- Sentence Transformers
+- scikit-learn
+- Pydantic and `pydantic-settings`
+- SpeechRecognition
+- Edge TTS
+- YAML-based content storage
+- pytest
+
+## Data model and retrieval
+
+The assistant uses 93 YAML files in `data/programs/` as its primary knowledge base. `ProgramDataStore` parses each file into Pydantic models, indexes them by code and degree level, and builds semantic embeddings with `paraphrase-multilingual-MiniLM-L12-v2`.
+
+Retrieved context is built from fields such as:
+
+- title and degree level
+- faculty
+- language of instruction
+- academic eligibility
+- fee information
+- intake windows and application dates
+
+## Voice and chat behavior
+
+The project supports two interaction styles:
+
+- Text chat: standard request-response chat inside the assistant page.
+- Live chat: a continuous loop managed by `LiveChatWorker` and `LocalVoiceHandler`.
+
+Speech handling currently relies on:
+
+- speech recognition through the `SpeechRecognition` package
+- spoken output through `EdgeTTSEngine`
+- response cleanup in `ConversationManager._clean_text_for_tts()` so markdown is not spoken literally
+
+## Sessions and cache
+
+Session history is persisted under `data/sessions/` as JSON files. A new session is created automatically when the assistant page is opened from another page. Titles are derived from the first user message.
+
+The response cache is stored under `data/cache/` and supports:
+
+- exact query matches
+- semantic query matches using embeddings
+- TTL-based expiration
+- optional disk persistence via `diskcache`
+
+## Setup
 
 ### Prerequisites
 
-- **Python 3.10+**
-- **FFmpeg** (for audio processing)
-  - Windows: Download from [ffmpeg.org](https://ffmpeg.org/download.html) and add to PATH
-  - macOS: `brew install ffmpeg`
-  - Linux: `sudo apt install ffmpeg`
-- **Google Gemini API Key** ([Get one here](https://ai.google.dev/))
+- Python 3.9 or newer
+- a Gemini API key
+- audio input/output support if you want to use voice features
 
-### Installation
+### Install
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/thd-assistant.git
-   cd thd-assistant
-   ```
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements_streamlit.txt
+pip install -r requirements_gemini.txt
+pip install -e .
+```
 
-2. **Create a virtual environment**
-   ```bash
-   python -m venv .venv
-   
-   # Windows
-   .venv\Scripts\activate
-   
-   # macOS/Linux
-   source .venv/bin/activate
-   ```
+Create `.env` in the project root. At minimum:
 
-3. **Install dependencies**
-   ```bash
-   # For Streamlit web app
-   pip install -r requirements_streamlit.txt
-   
-   # OR for Gemini API integration (includes Streamlit deps)
-   pip install -r requirements_gemini.txt
-   ```
+```env
+GEMINI_API_KEY=your_key_here
+```
 
-4. **Install the project in editable mode**
-   ```bash
-   pip install -e .
-   ```
-
-5. **Configure environment variables**
-   ```bash
-   # Copy the example file
-   cp .env.example .env
-   
-   # Edit .env and add your API keys
-   ```
-
-   Required `.env` contents (see `.env.example` for all options):
-   ```env
-   # Google Gemini API
-   GEMINI_API_KEY=your_gemini_api_key_here
-   GEMINI_MODEL_NAME=gemini-1.5-flash
-   
-   # Optional: Performance & UI
-   ENABLE_RESPONSE_CACHE=true
-   LOG_LEVEL=INFO
-   ```
-
-## 💻 Usage
-
-### Web Application (Streamlit)
+## Run the app
 
 ```bash
 streamlit run Home.py
 ```
 
-The app will open in your browser at `http://localhost:8501`
+Default local URL:
 
-### Features Overview
+```text
+http://localhost:8501
+```
 
-#### 1. **Program Search** 🔍
-- Filter by degree level (Bachelor, Master, Doctoral)
-- Filter by faculty, language, duration, ECTS
-- Compare multiple programs side-by-side
+## Testing
 
-#### 2. **Program Details** 📋
-- View comprehensive program information
-- See admission requirements, fees, deadlines
-- Access faculty contact information
+The repository already contains:
 
-#### 3. **AI Assistant** 🤖
-Two interaction modes:
-- **Text Mode**: Type questions and get instant answers
-- **Live Chat Mode**: Voice conversation with STT + TTS
+- data-quality tests for all YAML program files
+- unit tests for core models and session management
+- contract-style tests for LLM integration behavior
+- a manual voice test checklist
 
-Example questions:
-- "What programs are available in Computer Science?"
-- "How much are the tuition fees for international students?"
-- "What documents do I need to apply as an EU student?"
-- "When is the application deadline for Master's programs?"
-
-#### 4. **Settings** ⚙️
-- Select language (English/German)
-- Choose student category (Domestic/EU/International)
-- Configure voice preferences
-- Manage session history
-
-## 🧪 Testing
-
-The project includes a comprehensive test suite:
+Useful commands:
 
 ```bash
-# Run all tests
-python -m pytest
-
-# Run specific test categories
-python -m pytest tests/unit/          # Unit tests
-python -m pytest tests/integration/   # Integration tests (Planned)
-python -m pytest tests/contract/      # LLM contract tests
-python -m pytest tests/data/          # Data quality tests (838+ tests)
-
-# Run with verbose output
-python -m pytest -v
-
-# Run tests with specific markers
-python -m pytest -m "data_quality"
+pytest
+pytest tests/data -v
+pytest tests/unit -v
+pytest tests/contract -v
 ```
 
-**Test Coverage:**
-- ✅ 850+ tests passing
-- ✅ 93 YAML files validated via systematic review
-- ✅ LLM contract tests (validates prompts & response handling)
-- ✅ Unit tests for core models and session management
-- ⏳ Integration & E2E tests (Planned/Under Development)
+## Wiki
 
-## 📊 Data Management
+Project wiki pages live in `application-admission-assistant-thd.wiki/`.
 
-### Program Data
+Main pages:
 
-All 93 university programs are stored as YAML files in `data/programs/`. Each file contains:
-- Program code, title, degree level
-- Faculty, duration, ECTS credits
-- Admission requirements
-- Fee structure (Domestic/EU/International)
-- Language of instruction
-- Application deadlines
-- Contact information
+- `home.md`
+- `Project_Description.md`
+- `Personae.md`
+- `Use_Cases.md`
+- `Example_Dialogs.md`
+- `Flow.md`
 
-### Data Validation
+## Notes from the current implementation
 
-Run data quality tests to verify YAML integrity:
-```bash
-python -m pytest tests/data/test_yaml_validation.py -v
-```
-
-## 🔧 Configuration
-
-### Application Settings (`src/config.py`)
-
-```python
-PROGRAMS_DATA_PATH = "data/programs"  # YAML program files
-CONFIG_PATH = "config/content_index.yaml"  # Program index
-GEMINI_MODEL_NAME = "gemini-1.5-flash"  # LLM model
-LLM_MAX_TOKENS = 1024  # Response length limit
-```
-
-### Environment Variables
-
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `GEMINI_API_KEY` | Google Gemini API key | ✅ Yes |
-| `GEMINI_MODEL_NAME` | Name of the Gemini model to use | ❌ Optional |
-
-## 🤝 Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-### Development Guidelines
-
-- Follow PEP 8 style guidelines
-- Add unit tests for new features
-- Update documentation as needed
-- Run `pytest` before submitting PR
+- The knowledge base size is 93 program files.
+- The app is bilingual at the UI and prompt level for English and German.
+- Session persistence is local-file based, not database backed.
+- The assistant page instantiates `GeminiLLMEngine` with its constructor defaults; if model selection should be fully environment-driven, that wiring still needs to be connected explicitly.
 
 
-
-## 🙏 Acknowledgments
-
-- **Technische Hochschule Deggendorf** for program data
-- **Google Gemini** for LLM capabilities
-- **Streamlit** for the web framework
-- **Edge-TTS** for high-quality text-to-speech
-
-
----
-
-**Built with ❤️ for students exploring THD programs**

@@ -74,7 +74,7 @@ class LiveChatWorker:
                 self.voice_handler.stop_playback()
                 time.sleep(0.25)
                 try:
-                    text, _ = self.voice_handler.listen_once(
+                    text, audio_data = self.voice_handler.listen_once(
                         listen_timeout=30.0, language=self.language
                     )
                 except AudioDeviceError as e:
@@ -85,12 +85,27 @@ class LiveChatWorker:
                 if self.stop_event.is_set():
                     break
 
-                if text is None:
+                if text is None and audio_data is None:
                     self.status = "no_voice"
                     time.sleep(2)
                     continue
 
-                if text == "":
+                if audio_data is None:
+                    self.status = "unclear"
+                    time.sleep(2)
+                    continue
+
+                self.status = "thinking"
+                if self.stop_event.is_set():
+                    break
+
+                text, response, audio_response = self.manager.process_voice_query(
+                    audio_data,
+                    preferred_language=self.language,
+                    sample_rate=self.voice_handler.sample_rate,
+                )
+
+                if not text:
                     self.status = "unclear"
                     time.sleep(2)
                     continue
@@ -102,14 +117,6 @@ class LiveChatWorker:
                     break
 
                 self._append_message("user", text)
-
-                self.status = "thinking"
-                if self.stop_event.is_set():
-                    break
-
-                response, audio_response = self.manager.process_text_query(
-                    text, self.language
-                )
                 self._append_message("assistant", response)
 
                 if self.stop_event.is_set():

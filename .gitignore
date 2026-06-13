@@ -101,3 +101,7 @@ service-account.json
 # Private files
 main.py
 application-admission-assistant-thd.wiki/ 
+
+test_js.py
+
+test_html.py

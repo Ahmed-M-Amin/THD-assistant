@@ -20,6 +20,7 @@ from src.config import settings
 from src.local_voice_handler import LocalVoiceHandler, AudioDeviceError
 from src.live_chat_worker import LiveChatWorker
 from src.session_manager import SessionManager
+from src.voice_runtime_config import resolve_audio_device_index
 
 # Page config
 st.set_page_config(page_title="THD Assistant", page_icon="🤖", layout="wide")
@@ -40,7 +41,12 @@ if "conversation_manager" not in st.session_state:
             data_store = ProgramDataStore()
             st.session_state.data_store = data_store
 
-        stt = SpeechRecognitionSTTEngine()
+        audio_device_index = resolve_audio_device_index(settings.AUDIO_INPUT_DEVICE)
+        stt = SpeechRecognitionSTTEngine(
+            audio_device=audio_device_index,
+            sample_rate=settings.SAMPLE_RATE,
+            preferred_language=language.lower(),
+        )
         llm = GeminiLLMEngine(api_key=settings.GEMINI_API_KEY, data_store=data_store)
         tts = EdgeTTSEngine()
         st.session_state.conversation_manager = ConversationManager(stt, llm, tts)
@@ -174,7 +180,11 @@ def reset_live_chat_state():
 
 def get_live_chat_worker() -> LiveChatWorker:
     if "voice_handler" not in st.session_state:
-        st.session_state.voice_handler = LocalVoiceHandler()
+        audio_device_index = resolve_audio_device_index(settings.AUDIO_INPUT_DEVICE)
+        st.session_state.voice_handler = LocalVoiceHandler(
+            device_index=audio_device_index,
+            sample_rate=settings.SAMPLE_RATE,
+        )
 
     session = st.session_state.current_session
     worker = st.session_state.get("live_chat_worker")

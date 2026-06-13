@@ -1,8 +1,10 @@
 """Speech-to-Text engine using the SpeechRecognition library."""
 
 import logging
-import speech_recognition as sr
+import re
+
 import numpy as np
+import speech_recognition as sr
 
 logger = logging.getLogger(__name__)
 
@@ -12,6 +14,21 @@ class SpeechRecognitionSTTEngine:
     Speech-to-Text engine utilizing the SpeechRecognition library
     with Google Web Speech API for transcription.
     """
+
+    CORRECTIONS = {
+        r"\bbatchel\b": "bachelor",
+        r"\bbachler\b": "bachelor",
+        r"\bbachlor\b": "bachelor",
+        r"\bfeast\b": "fees",
+        r"\bfees\b": "fees",
+        r"\bmasters\b": "master",
+        r"\bthd\b": "THD",
+        r"\bth d\b": "THD",
+        r"\btech\s*deggendorf\b": "Technische Hochschule Deggendorf",
+        r"\bcomputer\s*sience\b": "computer science",
+        r"\bcyber\s*secuirty\b": "cyber security",
+        r"\bcyber\s*secutiry\b": "cyber security",
+    }
 
     def __init__(
         self,
@@ -32,15 +49,18 @@ class SpeechRecognitionSTTEngine:
         self.sample_rate = sample_rate
         self.preferred_language = preferred_language
 
-        # Enable dynamic energy threshold for better adaptability
         self.recognizer.dynamic_energy_threshold = True
-
-        # Map language codes to Google Speech API locale codes
         self.language_map = {"en": "en-US", "de": "de-DE"}
 
         logger.info(
             f"SpeechRecognition STT engine initialized. Audio Device: {self.audio_device}, Sample Rate: {self.sample_rate}, Language: {self.preferred_language}"
         )
+
+    def _fix_domain_terms(self, text: str) -> str:
+        """Correct common THD-related misrecognitions after transcription."""
+        for pattern, replacement in self.CORRECTIONS.items():
+            text = re.sub(pattern, replacement, text, flags=re.IGNORECASE)
+        return text
 
     def transcribe(self) -> str:
         """
@@ -49,7 +69,6 @@ class SpeechRecognitionSTTEngine:
         Returns:
             Transcribed text, or an empty string if no speech is detected or an error occurs.
         """
-        # Get the correct language code for Google Speech API
         google_language = self.language_map.get(self.preferred_language, "en-US")
 
         with sr.Microphone(
@@ -61,6 +80,7 @@ class SpeechRecognitionSTTEngine:
                 audio = self.recognizer.listen(source)
                 logger.info("Speech detected, transcribing...")
                 text = self.recognizer.recognize_google(audio, language=google_language)
+                text = self._fix_domain_terms(text)
                 logger.debug(f"Transcribed: {text}")
                 return text
             except sr.UnknownValueError:
@@ -89,39 +109,29 @@ class SpeechRecognitionSTTEngine:
         Returns:
             Transcribed text, or an empty string if no speech is detected or an error occurs.
         """
-        # Get the correct language code for Google Speech API
         google_language = self.language_map.get(language, "en-US")
 
-        # Handle stereo audio - convert to mono by averaging channels
         if len(audio_data.shape) > 1 and audio_data.shape[1] > 1:
             logger.info(f"Converting stereo audio to mono (shape: {audio_data.shape})")
             audio_data = np.mean(audio_data, axis=1)
 
-        # Ensure audio is 1D
         audio_data = audio_data.flatten()
 
-        # NORMALIZE AUDIO - boost quiet recordings for better transcription
         max_amplitude = np.max(np.abs(audio_data))
         if max_amplitude > 0 and max_amplitude < 0.5:
-            # Audio is too quiet, normalize to 0.8 max amplitude
             normalization_factor = 0.8 / max_amplitude
             audio_data = audio_data * normalization_factor
             audio_data = np.clip(audio_data, -1.0, 1.0)
             logger.info(
-                f"🔊 Audio normalized: {max_amplitude:.4f} → 0.8 (factor: {normalization_factor:.1f}x)"
+                f"Audio normalized: {max_amplitude:.4f} -> 0.8 (factor: {normalization_factor:.1f}x)"
             )
 
-        # Convert numpy array to SpeechRecognition AudioData format
-        # Check if audio is already int16 or needs conversion from float32
         if audio_data.dtype == np.int16:
             audio_data_int16 = audio_data
         else:
-            # Assume float32 in range [-1.0, 1.0], convert to int16
             audio_data_int16 = (audio_data * 32767).astype(np.int16)
 
-        audio = sr.AudioData(
-            audio_data_int16.tobytes(), sample_rate, 2
-        )  # 2 bytes per sample for int16
+        audio = sr.AudioData(audio_data_int16.tobytes(), sample_rate, 2)
 
         logger.info(
             f"Transcribing pre-recorded audio (sample_rate={sample_rate}, language={google_language})..."
@@ -132,11 +142,12 @@ class SpeechRecognitionSTTEngine:
 
         try:
             text = self.recognizer.recognize_google(audio, language=google_language)
-            logger.info(f"✓ Transcribed successfully: {text}")
+            text = self._fix_domain_terms(text)
+            logger.info(f"Transcribed successfully: {text}")
             return text
         except sr.UnknownValueError:
             logger.warning(
-                "⚠ Google Speech Recognition could not understand audio - audio may be too quiet, unclear, or contain no speech"
+                "Google Speech Recognition could not understand audio - audio may be too quiet, unclear, or contain no speech"
             )
             return ""
         except sr.RequestError as e:
